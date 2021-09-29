@@ -39,6 +39,7 @@ def check_for_program_termination():
 
 
 def main_loop():
+    take_screenshot()
     while True:
         try:
             take_screenshot()
