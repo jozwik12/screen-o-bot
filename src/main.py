@@ -15,13 +15,17 @@ def take_screenshot():
     time.sleep(time_between_screenshots)
 
 
+def check_for_program_termination():
+    x, y = gui.position()
+    if x == 0 and y == 0:
+        raise gui.FailSafeException
+
+
 def main_loop():
     while True:
         try:
             take_screenshot()
-            x, y = gui.position()
-            if x == 0 and y == 0:
-                raise gui.FailSafeException
+            check_for_program_termination()
         except gui.FailSafeException:
             gui.alert("Program has been stopped")
             exit()
