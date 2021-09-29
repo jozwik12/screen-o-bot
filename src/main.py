@@ -41,12 +41,14 @@ def check_for_program_termination():
 def main_loop():
     take_screenshot()
     while True:
-        try:
-            take_screenshot()
-            check_for_program_termination()
-        except gui.FailSafeException:
-            gui.alert("Program has been stopped")
-            exit()
+        time.sleep(0.5)
+        if compare_screenshots():
+            try:
+                take_screenshot()
+                check_for_program_termination()
+            except gui.FailSafeException:
+                gui.alert("Program has been stopped")
+                exit()
 
 
 main_loop()
