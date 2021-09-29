@@ -5,6 +5,7 @@ gui.PAUSE = 0.05
 gui.FAILSAFE = True
 counter = 0
 time_between_screenshots = 2
+comparison_confidence = 0.9
 
 
 def take_screenshot():
