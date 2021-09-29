@@ -9,7 +9,7 @@ comparison_confidence = 0.9
 
 
 def take_screenshot():
-    myscreenshot = gui.screenshot()
+    myscreenshot = gui.screenshot(region=(5, 5, 900, 880))
     global counter
     counter += 1
     myscreenshot.save(fr"C:\Users\TITAN\Desktop\pyscreens\screenshot_{counter}.png")
