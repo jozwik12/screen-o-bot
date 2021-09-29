@@ -1,7 +1,7 @@
 import pyautogui as gui
 import time
 
-gui.PAUSE = 1
+gui.PAUSE = 0.05
 gui.FAILSAFE = True
 counter = 0
 time_between_screenshots = 2
