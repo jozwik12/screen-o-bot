@@ -58,13 +58,13 @@ def main_loop():
     take_screenshot()
     while True:
         time.sleep(0.2)
+        try:
+            check_for_program_termination()
+        except gui.FailSafeException:
+            gui.alert("Program has been stopped")
+            exit()
         if compare_screenshots():
-            try:
-                take_screenshot()
-                check_for_program_termination()
-            except gui.FailSafeException:
-                gui.alert("Program has been stopped")
-                exit()
+            take_screenshot()
 
 
 main_loop()
