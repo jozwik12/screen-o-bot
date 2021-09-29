@@ -13,16 +13,12 @@ folder_name = ""
 
 
 def create_dated_folder():
-    global save_path
     global folder_name
     folder_name = "\\" + dt.datetime.now().strftime("%Y-%m-%d %H.%M")
     os.mkdir(save_path + folder_name)
 
 
 def take_screenshot():
-    global save_path
-    global folder_name
-    global counter
     increment_counter()
     myscreenshot = gui.screenshot(region=(5, 5, 900, 880))
     myscreenshot.save(save_path + folder_name + fr"\screenshot_{counter}.png")
@@ -43,9 +39,6 @@ returns false if previous screenshot is the same as current screen state
 
 
 def compare_screenshots():
-    global save_path
-    global folder_name
-    global counter
     try:
         loc = gui.locateOnScreen(save_path + folder_name + fr"\screenshot_{counter}.png",
                                  confidence=comparison_confidence)
