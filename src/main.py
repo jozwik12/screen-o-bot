@@ -6,13 +6,15 @@ gui.FAILSAFE = True
 counter = "000"
 time_between_screenshots = 0
 comparison_confidence = 0.95
+folder_path = r"C:\Users\TITAN\Desktop\pyscreens"
 
 
 def take_screenshot():
+    global folder_path
     global counter
     increment_counter()
     myscreenshot = gui.screenshot(region=(5, 5, 900, 880))
-    myscreenshot.save(fr"C:\Users\TITAN\Desktop\pyscreens\screenshot_{counter}.png")
+    myscreenshot.save(folder_path + fr"\screenshot_{counter}.png")
     time.sleep(time_between_screenshots)
 
 
@@ -29,9 +31,10 @@ returns true if there is difference between current, and previous screenshot
 returns false if previous screenshot is the same as current screen state
 """
 def compare_screenshots():
+    global folder_path
     global counter
     try:
-        loc = gui.locateOnScreen(fr"C:\Users\TITAN\Desktop\pyscreens\screenshot_{counter}.png",
+        loc = gui.locateOnScreen(folder_path + fr"\screenshot_{counter}.png",
                                  confidence=comparison_confidence)
         return not bool(loc)
     except gui.ImageNotFoundException:
