@@ -3,17 +3,23 @@ import time
 
 gui.PAUSE = 0.05
 gui.FAILSAFE = True
-counter = 0
+counter = "000"
 time_between_screenshots = 0
 comparison_confidence = 0.95
 
 
 def take_screenshot():
-    myscreenshot = gui.screenshot(region=(5, 5, 900, 880))
     global counter
-    counter += 1
+    increment_counter()
+    myscreenshot = gui.screenshot(region=(5, 5, 900, 880))
     myscreenshot.save(fr"C:\Users\TITAN\Desktop\pyscreens\screenshot_{counter}.png")
     time.sleep(time_between_screenshots)
+
+
+def increment_counter():
+    global counter
+    counter = int(counter) + 1
+    counter = str(counter).zfill(3)
 
 
 """
