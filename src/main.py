@@ -20,7 +20,7 @@ comparison_confidence = 0.95
 
 # Default folder for screens
 # TODO: some input method instead of hardcoding it
-save_path = r"C:\Users\TITAN\Desktop\pyscreens"
+save_path = os.path.expanduser('~') + r"\Desktop\pyscreens"
 
 # Default folder name, set after invoking create_dated_folder() method
 folder_name = ""
