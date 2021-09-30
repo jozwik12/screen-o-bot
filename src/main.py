@@ -25,13 +25,14 @@ save_path = os.path.expanduser('~') + r"\Desktop\pyscreens"
 # Default folder name, set after invoking create_dated_folder() method
 folder_name = ""
 
-""" 
-Creates folder with current date and time in format YYYY-MM-DD hh-mm
-Every screenshot taken during current session is stored inside this folder
-When program is run twice in the same minute, files from later session overwrites
-files from earlier one
-"""
+
 def create_dated_folder():
+    """
+    Creates folder with current date and time in format YYYY-MM-DD hh-mm
+    Every screenshot taken during current session is stored inside this folder
+    When program is run twice in the same minute, files from later session overwrites
+    files from earlier one
+    """
     global folder_name
     folder_name = "\\" + dt.datetime.now().strftime("%Y-%m-%d %H.%M")
     try:
@@ -40,36 +41,36 @@ def create_dated_folder():
         pass
 
 
-"""
-Takes screenshot of the specified screen region
-"""
-# TODO: check best time_between_screenshots time
-# TODO: implement something to specify screen region instead of hardcoding it
 def take_screenshot():
+    """
+    Takes screenshot of the specified screen region
+    """
+    # TODO: check best time_between_screenshots time
+    # TODO: implement something to specify screen region instead of hardcoding it
     increment_counter()
     myscreenshot = gui.screenshot(region=(5, 5, 900, 880))
     myscreenshot.save(save_path + folder_name + fr"\screenshot_{counter}.png")
     time.sleep(time_between_screenshots)
 
 
-""" 
-Increases counter by 1 to not overwrite previous screenshots
-Counter is always 3-digit number in format XXX
-Small numbers have leading zeros
-"""
 def increment_counter():
+    """
+    Increases counter by 1 to not overwrite previous screenshots
+    Counter is always 3-digit number in format XXX
+    Small numbers have leading zeros
+    """
     global counter
     counter = int(counter) + 1
     counter = str(counter).zfill(3)
 
 
-""" 
-Checks if current screen state is similar to latest screenshot
-returns true if there is difference between current, and previous screenshot
-meaning - screenshot should be taken, as screen state has changed
-returns false if previous screenshot is the same as current screen state
-"""
 def compare_screenshots():
+    """
+    Checks if current screen state is similar to latest screenshot
+    returns true if there is difference between current, and previous screenshot
+    meaning - screenshot should be taken, as screen state has changed
+    returns false if previous screenshot is the same as current screen state
+    """
     try:
         loc = gui.locateOnScreen(save_path + folder_name + fr"\screenshot_{counter}.png",
                                  confidence=comparison_confidence)
@@ -78,23 +79,23 @@ def compare_screenshots():
         return True
 
 
-""" 
-pyautogui has FAILSAFE method that when set to True throws FailSafeException if cursor
-is put in the upper left corner of the screen
-However, exception is sometimes not thrown
-This method implements same behaviour, but exception throwing is much more reliable 
-"""
 def check_for_program_termination():
+    """
+    pyautogui has FAILSAFE method that when set to True throws FailSafeException if cursor
+    is put in the upper left corner of the screen
+    However, exception is sometimes not thrown
+    This method implements same behaviour, but exception throwing is much more reliable
+    """
     x, y = gui.position()
     if x == 0 and y == 0:
         raise gui.FailSafeException
 
 
-""" 
-Main program loop
-Stops when mouse is moved to upper left corner of the screen
-"""
 def main_loop():
+    """
+    Main program loop
+    Stops when mouse is moved to upper left corner of the screen
+    """
     create_dated_folder()
     take_screenshot()
     while True:
