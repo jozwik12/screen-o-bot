@@ -102,7 +102,7 @@ def main_loop():
         try:
             check_for_program_termination()
         except gui.FailSafeException:
-            gui.alert("Program has been stopped")
+            gui.alert(text="Program has been stopped", title="Program terminated")
             exit()
         if compare_screenshots():
             take_screenshot()
