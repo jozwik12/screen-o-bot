@@ -7,9 +7,10 @@ taking them only when screen changes.
 
 Currently screen-o-bot requires:
 
-- pyautogui
-- Pillow
-- OpenCV
+- [Python 3.4 or newer](https://www.python.org/)
+- [pyautogui](https://pyautogui.readthedocs.io/en/latest/)
+- [Pillow](https://pypi.org/project/Pillow/)
+- [OpenCV for Python](https://pypi.org/project/opencv-python/)
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install dependencies.
 
