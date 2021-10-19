@@ -98,6 +98,7 @@ def main_loop():
     """
     create_dated_folder()
     take_screenshot()
+    print("program works")
     while True:
         time.sleep(0.2)
         try:
