@@ -10,7 +10,7 @@ gui.PAUSE = 0.05
 gui.FAILSAFE = True
 
 # Counter used for file naming
-counter = "000"
+counter = "0000"
 
 # Sleep time after taking screenshot
 time_between_screenshots = 0
@@ -61,7 +61,7 @@ def increment_counter():
     """
     global counter
     counter = int(counter) + 1
-    counter = str(counter).zfill(3)
+    counter = str(counter).zfill(4)
 
 
 def compare_screenshots():
