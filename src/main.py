@@ -73,7 +73,7 @@ def take_screenshot():
     # TODO: check best time_between_screenshots time
     # TODO: implement something to specify screen region instead of hardcoding it
     increment_counter()
-    myscreenshot = gui.screenshot(region=(5, 5, 900, 880))
+    myscreenshot = gui.screenshot(region=(5, 30, 1700, 1020))
     myscreenshot.save(save_path + folder_name + fr"\screenshot_{counter}.png")
     time.sleep(time_between_screenshots)
 
