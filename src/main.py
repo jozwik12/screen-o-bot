@@ -59,6 +59,7 @@ def create_dated_folder():
     folder_name = "\\" + dt.datetime.now().strftime("%Y-%m-%d %H.%M")
     try:
         os.makedirs(save_path + folder_name)
+        print(save_path + folder_name)
     except FileExistsError:
         pass
 
