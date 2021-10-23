@@ -97,7 +97,7 @@ def sth_excluded_is_on_screen():
     return False
 
 
-def compare_screenshots():
+def screen_has_changed():
     """
     Checks if current screen state is similar to latest screenshot
     returns true if there is difference between current, and previous screenshot
@@ -139,7 +139,7 @@ def main_loop():
         except gui.FailSafeException:
             gui.alert(text="Program has been stopped", title="Program terminated")
             exit()
-        if compare_screenshots():
+        if screen_has_changed() and not sth_excluded_is_on_screen():
             take_screenshot()
 
 
