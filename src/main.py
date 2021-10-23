@@ -120,7 +120,7 @@ def check_for_program_termination():
     This method implements same behaviour, but exception throwing is much more reliable
     """
     x, y = gui.position()
-    if x == 1919 and y == 0:
+    if x == 1919 and y == 1079:
         raise gui.FailSafeException
 
 
