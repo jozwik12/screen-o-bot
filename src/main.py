@@ -18,12 +18,37 @@ time_between_screenshots = 0
 # Parameter that dictates, how similar previous screenshot must be in relation to current screen state
 comparison_confidence = 0.95
 
+# Parameter that dictates, how comparison confidence of excluded files to current screen state
+excluded_comparison_confidence = 0.95
+
 # Default folder for screens
 # TODO: some input method instead of hardcoding it
 save_path = os.path.expanduser('~') + r"\Desktop\pyscreens"
 
 # Default folder name, set after invoking create_dated_folder() method
 folder_name = ""
+
+
+def get_main_folder_path():
+    main_path = os.path.realpath(__file__).split("\\")
+    main_path = main_path[:-2]
+    return "\\".join(main_path)
+
+
+def get_excluded_path():
+    excluded_path = get_main_folder_path() + r"\excluded"
+    return excluded_path
+
+
+def list_excluded_files():
+    list_temp = [f for f in os.listdir(get_excluded_path())
+                 if os.path.isfile(os.path.join(get_excluded_path(), f))]
+    list_temp = [get_excluded_path() + "\\" + elem for elem in list_temp]
+    return list_temp
+
+
+# Make list of excluded files constant to improve performance
+list_of_excluded_files = list_excluded_files()
 
 
 def create_dated_folder():
@@ -62,6 +87,17 @@ def increment_counter():
     global counter
     counter = int(counter) + 1
     counter = str(counter).zfill(4)
+
+
+def sth_excluded_is_on_screen():
+    global list_of_excluded_files
+    for excluded_elem in list_of_excluded_files:
+        try:
+            loc = gui.locateOnScreen(excluded_elem, confidence=excluded_comparison_confidence)
+            return bool(loc)
+        except gui.ImageNotFoundException:
+            pass
+    return False
 
 
 def compare_screenshots():
