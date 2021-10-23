@@ -6,9 +6,6 @@ import datetime as dt
 # Time between pyautogui commands
 gui.PAUSE = 0.05
 
-# Throws FailSafeException when mouse is moved to upper left corner of the screen
-gui.FAILSAFE = True
-
 # Counter used for file naming
 counter = "0000"
 
@@ -123,7 +120,7 @@ def check_for_program_termination():
     This method implements same behaviour, but exception throwing is much more reliable
     """
     x, y = gui.position()
-    if x == 0 and y == 0:
+    if x == 1919 and y == 0:
         raise gui.FailSafeException
 
 
