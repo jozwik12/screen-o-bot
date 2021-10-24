@@ -22,19 +22,19 @@ pip install pyautogui pillow opencv-python
 
 1. Run script
 
-![animation1](animations/Animation1.gif)
+![animation1](backend/animations/Animation1.gif)
 
 2. Folder named 'pyscreens' will be created on your Desktop
 
-![animation1](animations/Animation3.gif)
+![animation1](backend/animations/Animation3.gif)
 
 3. Inside this folder, a directory with current date and time will be created
 
-![animation1](animations/Animation2.gif)
+![animation1](backend/animations/Animation2.gif)
 
 4. Inside this directory, screens will be created whenever a given area of the screen will change its state
 
-![animation1](animations/Animation4.gif)
+![animation1](backend/animations/Animation4.gif)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
