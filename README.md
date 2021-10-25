@@ -58,5 +58,5 @@ For more information, check [official pyautogui documentation](https://pyautogui
 This method is not by any means perfect. Perhaps some elegant solution will be implemented.
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[GNU GPL-3.0](https://choosealicense.com/licenses/gpl-3.0/#)
 
