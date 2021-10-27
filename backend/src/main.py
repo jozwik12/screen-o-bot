@@ -22,7 +22,8 @@ excluded_comparison_confidence = 0.95
 # Default folder for screens
 # TODO: some input method instead of hardcoding it
 # save_path = os.path.expanduser('~') + r"\Desktop\pyscreens"
-save_path = os.path.expanduser('~') + r"\OneDrive - Politechnika Wroclawska\II stopien\9 sem\pyscreens"
+# save_path = os.path.expanduser('~') + r"\OneDrive - Politechnika Wroclawska\II stopien\9 sem\pyscreens"
+save_path = "D:\OneDrive - Politechnika Wroclawska\II stopien\9 sem\pyscreens"
 
 # Default folder name, set after invoking create_dated_folder() method
 folder_name = ""
