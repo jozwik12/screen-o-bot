@@ -115,12 +115,15 @@ def screen_has_changed():
     meaning - screenshot should be taken, as screen state has changed
     returns false if previous screenshot is the same as current screen state
     """
-    try:
-        loc = gui.locateOnScreen(save_path + folder_name + fr"\screenshot_{counter}.png",
-                                 confidence=comparison_confidence)
-        return not bool(loc)
-    except gui.ImageNotFoundException:
-        return True
+    while True:
+        try:
+            loc = gui.locateOnScreen(save_path + folder_name + fr"\screenshot_{counter}.png",
+                                     confidence=comparison_confidence)
+            return not bool(loc)
+        except gui.ImageNotFoundException:
+            return True
+        except IOError:
+            time.sleep(0.25)
 
 
 def check_for_program_termination():
