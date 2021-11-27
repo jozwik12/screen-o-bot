@@ -1,15 +1,19 @@
 {
   "name": "screen-o-bot",
-  "author":{
-    "name" : "jozwik12",
-    "email" : "szymonjozwicki@gmail.com",
-    "url" : "https://github.com/jozwik12/"
+  "author": {
+    "name": "jozwik12",
+    "email": "szymonjozwicki@gmail.com",
+    "url": "https://github.com/jozwik12/"
   },
   "version": "0.1.0",
   "private": true,
   "homepage": "./",
   "main": "src/electron-starter.js",
   "dependencies": {
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.2.0",
+    "@mui/material": "^5.2.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
