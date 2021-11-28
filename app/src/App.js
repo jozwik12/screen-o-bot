@@ -1,7 +1,16 @@
-function App() {
+import Button from "@mui/material/Button";
+
+const App = () => {
   return (
-    <div> HelloWorld! </div>
+    <Button
+      variant="contained"
+      onClick={() => {
+        window.ipcRenderer.send("openRecorder", "true");
+      }}
+    >
+      Hello World!
+    </Button>
   );
-}
+};
 
 export default App;
