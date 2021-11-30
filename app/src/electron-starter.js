@@ -10,7 +10,7 @@ ipcMain.on("openPythonRenderer", (event, data) => createPythonWindow());
 
 const createRecorderWindow = () => {
   //TODO: check if window can be made click-through but draggable
-  const newWindow = new BrowserWindow({
+  const rendererWindow = new BrowserWindow({
     width: 400,
     height: 300,
     title: "recorder",
