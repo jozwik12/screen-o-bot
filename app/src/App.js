@@ -2,14 +2,24 @@ import Button from "@mui/material/Button";
 
 const App = () => {
   return (
-    <Button
-      variant="contained"
-      onClick={() => {
-        window.ipcRenderer.send("openRecorder", "true");
-      }}
-    >
-      Hello World!
-    </Button>
+    <div>
+      <Button
+        variant="contained"
+        onClick={() => {
+          window.ipcRenderer.send("openRecorder", "true");
+        }}
+      >
+        Hello World!
+      </Button>
+      <Button
+        variant="contained"
+        onClick={() => {
+          window.ipcRenderer.send("openPythonRenderer");
+        }}
+      >
+        Run Python!
+      </Button>
+    </div>
   );
 };
 

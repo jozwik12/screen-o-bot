@@ -4,12 +4,29 @@ const path = require("path");
 const isDev = require("electron-is-dev");
 
 ipcMain.on("openRecorder", (event, data) => createRecorderWindow());
+ipcMain.on("openPythonRenderer", (event, data) => createPythonWindow());
 
 const createRecorderWindow = () => {
   const newWindow = new BrowserWindow({
     width: 400,
     height: 300,
-    title: "2nd window",
+    title: "recorder",
+    alwaysOnTop: true,
+    opacity: 0.2,
+    // transparent:true,
+    resizable:true,
+    // webPreferences: {
+      // preload: path.join(__dirname, "preloadRecorder.js"),
+    // },
+  });
+  // newWindow.setIgnoreMouseEvents(true);
+};
+
+const createPythonWindow = () => {
+  const pyWindow = new BrowserWindow({
+    width: 400,
+    height: 300,
+    title: "python shell",
   });
 };
 
