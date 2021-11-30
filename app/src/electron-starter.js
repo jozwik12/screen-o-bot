@@ -22,9 +22,9 @@ const createRecorderWindow = () => {
       // preload: path.join(__dirname, "preloadRecorder.js"),
     // },
   });
-  // rendererWindow.setIgnoreMouseEvents(true);
-  rendererWindow.menuBarVisible = false;
-  rendererWindow.minimizable = false;
+  // recorderWindow.setIgnoreMouseEvents(true);
+  recorderWindow.menuBarVisible = false;
+  recorderWindow.minimizable = false;
 
   const getWindowCoordinates = setInterval(() => {
     [xpos, ypos] = recorderWindow.getPosition();
