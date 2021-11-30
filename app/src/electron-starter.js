@@ -2,11 +2,14 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
+let { PythonShell } = require("python-shell");
+const log = require("electron-log");
 
 ipcMain.on("openRecorder", (event, data) => createRecorderWindow());
 ipcMain.on("openPythonRenderer", (event, data) => createPythonWindow());
 
 const createRecorderWindow = () => {
+  //TODO: check if window can be made click-through but draggable
   const newWindow = new BrowserWindow({
     width: 400,
     height: 300,
