@@ -2,11 +2,19 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
-let { PythonShell } = require("python-shell");
+const { PythonShell } = require("python-shell");
 const log = require("electron-log");
 
 ipcMain.on("openRecorder", (event, data) => createRecorderWindow());
-ipcMain.on("openPythonRenderer", (event, data) => createPythonWindow());
+// ipcMain.on("openPythonRenderer", (event, data) => createPythonWindow());
+ipcMain.on("openPythonRenderer", (event, data) => runPython());
+
+const runPython = () => {
+  PythonShell.run("../backend/src/test.py", null, function (err, results) {
+    if (err) throw err;
+    log.info("test");
+  });
+};
 
 const createRecorderWindow = () => {
   //TODO: check if window can be made click-through but draggable
@@ -17,9 +25,9 @@ const createRecorderWindow = () => {
     alwaysOnTop: true,
     opacity: 0.2,
     // transparent:true,
-    resizable:true,
+    resizable: true,
     // webPreferences: {
-      // preload: path.join(__dirname, "preloadRecorder.js"),
+    // preload: path.join(__dirname, "preloadRecorder.js"),
     // },
   });
   // recorderWindow.setIgnoreMouseEvents(true);
@@ -39,7 +47,7 @@ const createRecorderWindow = () => {
 
   if (recorderWindow.isEnabled) getWindowCoordinates;
   recorderWindow.on("close", function () {
-    clearInterval(getWindowCoordinates)
+    clearInterval(getWindowCoordinates);
   });
 };
 
