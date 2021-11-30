@@ -10,7 +10,7 @@ ipcMain.on("openPythonRenderer", (event, data) => createPythonWindow());
 
 const createRecorderWindow = () => {
   //TODO: check if window can be made click-through but draggable
-  const rendererWindow = new BrowserWindow({
+  const recorderWindow = new BrowserWindow({
     width: 400,
     height: 300,
     title: "recorder",
@@ -27,8 +27,8 @@ const createRecorderWindow = () => {
   rendererWindow.minimizable = false;
 
   const getWindowCoordinates = setInterval(() => {
-    [xpos, ypos] = rendererWindow.getPosition();
-    [width, height] = rendererWindow.getSize();
+    [xpos, ypos] = recorderWindow.getPosition();
+    [width, height] = recorderWindow.getSize();
     log.info({
       height: height,
       width: width,
@@ -37,8 +37,8 @@ const createRecorderWindow = () => {
     });
   }, 2000);
 
-  if (rendererWindow.isEnabled) getWindowCoordinates;
-  rendererWindow.on("close", function () {
+  if (recorderWindow.isEnabled) getWindowCoordinates;
+  recorderWindow.on("close", function () {
     clearInterval(getWindowCoordinates)
   });
 };
