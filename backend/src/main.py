@@ -83,7 +83,8 @@ def play_notification_sound():
     # TODO: odd option to turn the sound on/off
     # TODO: check if asynchronous playing is necessary
     # TODO: add volume control
-    winsound.MessageBeep(type=winsound.MB_ICONHAND)
+    # winsound.MessageBeep(type=winsound.MB_ICONHAND)
+    pass
 
 
 def increment_counter():
@@ -155,7 +156,7 @@ def main_loop():
             exit()
         if screen_has_changed() and not sth_excluded_is_on_screen():
             take_screenshot()
-            play_notification_sound()
+            # play_notification_sound()
 
 
 if __name__ == "__main__":
