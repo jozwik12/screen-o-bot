@@ -4,15 +4,26 @@ const path = require("path");
 const isDev = require("electron-is-dev");
 const { PythonShell } = require("python-shell");
 const log = require("electron-log");
+const { sign } = require("crypto");
 
 ipcMain.on("openRecorder", (event, data) => createRecorderWindow());
 // ipcMain.on("openPythonRenderer", (event, data) => createPythonWindow());
 ipcMain.on("openPythonRenderer", (event, data) => runPython());
 
 const runPython = () => {
-  PythonShell.run("../backend/src/test.py", null, function (err, results) {
+  let pyshell = new PythonShell(
+    (script = "../backend/src/test.py"),
+    (options = {mode: "text"})
+  );
+
+  pyshell.send("this is the input")
+
+  pyshell.on("message", function (message) {
+    log.info(message);
+  });
+  pyshell.end(function (err, code, signal) {
     if (err) throw err;
-    log.info("test");
+    log.info("done");
   });
 };
 
