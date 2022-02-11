@@ -4,28 +4,10 @@ const path = require("path");
 const isDev = require("electron-is-dev");
 const { PythonShell } = require("python-shell");
 const log = require("electron-log");
-const { sign } = require("crypto");
+const { stringify } = require("querystring");
 
 ipcMain.on("openRecorder", (event, data) => createRecorderWindow());
-// ipcMain.on("openPythonRenderer", (event, data) => createPythonWindow());
-ipcMain.on("openPythonRenderer", (event, data) => runPython());
-
-const runPython = () => {
-  let pyshell = new PythonShell(
-    (script = "../backend/src/test.py"),
-    (options = {mode: "text"})
-  );
-
-  pyshell.send("this is the input")
-
-  pyshell.on("message", function (message) {
-    log.info(message);
-  });
-  pyshell.end(function (err, code, signal) {
-    if (err) throw err;
-    log.info("done");
-  });
-};
+ipcMain.on("openPythonRenderer", (event, data) => log.info("nothing"));
 
 const createRecorderWindow = () => {
   //TODO: check if window can be made click-through but draggable
@@ -45,32 +27,36 @@ const createRecorderWindow = () => {
   recorderWindow.menuBarVisible = false;
   recorderWindow.minimizable = false;
 
+  let pyshell = new PythonShell(
+    (script = "../backend/src/test.py"),
+    (options = { mode: "text" })
+  );
+
   const getWindowCoordinates = setInterval(() => {
     [xpos, ypos] = recorderWindow.getPosition();
     [width, height] = recorderWindow.getSize();
-    log.info({
-      height: height,
-      width: width,
-      ypos: ypos,
-      xpos: xpos,
-    });
+    pyshell.send(JSON.stringify({"width": width, "height": height, "xpos": xpos, "ypos":ypos}));
   }, 2000);
+
+  // pyshell.send(JSON.stringify({dupa: "yes"}));
+  // pyshell.send("dupa")
+
+  pyshell.on("message", function (message) {
+    log.info(JSON.parse(message));
+  });
 
   if (recorderWindow.isEnabled) getWindowCoordinates;
   recorderWindow.on("close", function () {
     clearInterval(getWindowCoordinates);
+    log.info("closed");
+    pyshell.end(function (err, code, signal) {
+      if (err) throw err;
+      log.info("done");
+    });
   });
 };
 
-const createPythonWindow = () => {
-  const pyWindow = new BrowserWindow({
-    width: 400,
-    height: 300,
-    title: "python shell",
-  });
-};
-
-function createMainWindow() {
+const createMainWindow= () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
