@@ -27,36 +27,45 @@ const createRecorderWindow = () => {
   recorderWindow.menuBarVisible = false;
   recorderWindow.minimizable = false;
 
-  let pyshell = new PythonShell(
-    (script = "../backend/src/test.py"),
-    (options = { mode: "text" })
+  let pyshell = new PythonShell("../backend/src/main.py", {
+    mode: "text",
+    pythonOptions: ["-u"],
+    pythonPath:
+      "c:/Users/Jozwik/Projects/screen-o-bot/backend/venv/Scripts/python.exe",
+  });
+
+  // const getWindowCoordinates = setInterval(() => {
+  //   [xpos, ypos] = recorderWindow.getPosition();
+  //   [width, height] = recorderWindow.getSize();
+  //   // pyshell.send(JSON.stringify({"xpos": xpos, "ypos":ypos, "width": width, "height": height}));
+  // }, 2000);
+
+  const [xpos, ypos] = recorderWindow.getPosition();
+  const [width, height] = recorderWindow.getSize();
+  pyshell.send(
+    JSON.stringify({ xpos: xpos, ypos: ypos, width: width, height: height })
   );
 
-  const getWindowCoordinates = setInterval(() => {
-    [xpos, ypos] = recorderWindow.getPosition();
-    [width, height] = recorderWindow.getSize();
-    pyshell.send(JSON.stringify({"width": width, "height": height, "xpos": xpos, "ypos":ypos}));
-  }, 2000);
-
-  // pyshell.send(JSON.stringify({dupa: "yes"}));
+  // pyshell.send(JSON.stringify({"xpos": 5, "ypos":30, "width": 100, "height": 1000}));
   // pyshell.send("dupa")
 
   pyshell.on("message", function (message) {
-    log.info(JSON.parse(message));
+    // log.info(JSON.parse(message));
+    log.info(message);
   });
 
-  if (recorderWindow.isEnabled) getWindowCoordinates;
+  // if (recorderWindow.isEnabled) getWindowCoordinates;
   recorderWindow.on("close", function () {
-    clearInterval(getWindowCoordinates);
-    log.info("closed");
+    // clearInterval(getWindowCoordinates);
     pyshell.end(function (err, code, signal) {
       if (err) throw err;
       log.info("done");
     });
+    log.info("closed");
   });
 };
 
-const createMainWindow= () => {
+const createMainWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
@@ -83,7 +92,7 @@ const createMainWindow= () => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
-}
+};
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

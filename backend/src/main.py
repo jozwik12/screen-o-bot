@@ -1,8 +1,10 @@
+import json
 import os
 import pyautogui as gui
 import time
 import datetime as dt
 import winsound
+import sys
 
 # Time between pyautogui commands
 gui.PAUSE = 0.05
@@ -21,12 +23,16 @@ excluded_comparison_confidence = 0.95
 
 # Default folder for screens
 # TODO: some input method instead of hardcoding it
-# save_path = os.path.expanduser('~') + r"\Desktop\pyscreens"
+save_path = os.path.expanduser('~') + r"\Desktop\pyscreens"
 # save_path = os.path.expanduser('~') + r"\OneDrive - Politechnika Wroclawska\II stopien\9 sem\pyscreens"
-save_path = "D:\OneDrive - Politechnika Wroclawska\II stopien\9 sem\pyscreens"
+# save_path = "D:\OneDrive - Politechnika Wroclawska\II stopien\9 sem\pyscreens"
 
 # Default folder name, set after invoking create_dated_folder() method
 folder_name = ""
+
+# Window coordinates input from node.js
+# input_coordinates = json.load(sys.stdin)
+input_coordinates = {"xpos": 5, "ypos": 30, "width": 1700, "height": 1020}
 
 
 def get_main_folder_path():
@@ -74,7 +80,8 @@ def take_screenshot():
     # TODO: check best time_between_screenshots time
     # TODO: implement something to specify screen region instead of hardcoding it
     increment_counter()
-    myscreenshot = gui.screenshot(region=(5, 30, 1700, 1020))
+    myscreenshot = gui.screenshot(region=(
+        input_coordinates["xpos"], input_coordinates["ypos"], input_coordinates["width"], input_coordinates["height"]))
     myscreenshot.save(save_path + folder_name + fr"\screenshot_{counter}.png")
     time.sleep(time_between_screenshots)
 
@@ -83,7 +90,8 @@ def play_notification_sound():
     # TODO: odd option to turn the sound on/off
     # TODO: check if asynchronous playing is necessary
     # TODO: add volume control
-    winsound.MessageBeep(type=winsound.MB_ICONHAND)
+    # winsound.MessageBeep(type=winsound.MB_ICONHAND)
+    pass
 
 
 def increment_counter():
@@ -101,7 +109,8 @@ def sth_excluded_is_on_screen():
     global list_of_excluded_files
     for excluded_elem in list_of_excluded_files:
         try:
-            loc = gui.locateOnScreen(excluded_elem, confidence=excluded_comparison_confidence)
+            loc = gui.locateOnScreen(
+                excluded_elem, confidence=excluded_comparison_confidence)
             return bool(loc)
         except gui.ImageNotFoundException:
             pass
@@ -151,7 +160,8 @@ def main_loop():
         try:
             check_for_program_termination()
         except gui.FailSafeException:
-            gui.alert(text="Program has been stopped", title="Program terminated")
+            gui.alert(text="Program has been stopped",
+                      title="Program terminated")
             exit()
         if screen_has_changed() and not sth_excluded_is_on_screen():
             take_screenshot()
