@@ -31,8 +31,8 @@ save_path = os.path.expanduser('~') + r"\Desktop\pyscreens"
 folder_name = ""
 
 # Window coordinates input from node.js
-# input_coordinates = json.load(sys.stdin)
-input_coordinates = {"xpos": 5, "ypos": 30, "width": 1700, "height": 1020}
+input_coordinates = json.loads(sys.stdin.readline())
+# input_coordinates = {"xpos": 5, "ypos": 30, "width": 1700, "height": 1020}
 
 
 def get_main_folder_path():

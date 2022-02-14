@@ -7,7 +7,7 @@ const log = require("electron-log");
 const { stringify } = require("querystring");
 
 ipcMain.on("openRecorder", (event, data) => createRecorderWindow());
-ipcMain.on("openPythonRenderer", (event, data) => log.info("nothing"));
+// ipcMain.on("openPythonRenderer", (event, data) => log.info("nothing"));
 
 const createRecorderWindow = () => {
   //TODO: check if window can be made click-through but draggable
@@ -19,9 +19,10 @@ const createRecorderWindow = () => {
     opacity: 0.2,
     // transparent:true,
     resizable: true,
-    // webPreferences: {
-    // preload: path.join(__dirname, "preloadRecorder.js"),
-    // },
+    frame: true,
+    webPreferences: {
+    preload: path.join(__dirname, "preloadRecorder.js"),
+    },
   });
   // recorderWindow.setIgnoreMouseEvents(true);
   recorderWindow.menuBarVisible = false;
@@ -34,17 +35,17 @@ const createRecorderWindow = () => {
       "c:/Users/Jozwik/Projects/screen-o-bot/backend/venv/Scripts/python.exe",
   });
 
-  // const getWindowCoordinates = setInterval(() => {
-  //   [xpos, ypos] = recorderWindow.getPosition();
-  //   [width, height] = recorderWindow.getSize();
-  //   // pyshell.send(JSON.stringify({"xpos": xpos, "ypos":ypos, "width": width, "height": height}));
-  // }, 2000);
-
-  const [xpos, ypos] = recorderWindow.getPosition();
-  const [width, height] = recorderWindow.getSize();
-  pyshell.send(
-    JSON.stringify({ xpos: xpos, ypos: ypos, width: width, height: height })
-  );
+  ipcMain.on("openPythonRenderer", (event, data) => {
+    const [xpos, ypos] = recorderWindow.getPosition();
+    const [width, height] = recorderWindow.getSize();
+    pyshell
+      .send(
+        JSON.stringify({ xpos: xpos, ypos: ypos, width: width, height: height })
+      )
+      .end(function (err, code, signal) {
+        if (err) throw err;
+      });
+  });
 
   // pyshell.send(JSON.stringify({"xpos": 5, "ypos":30, "width": 100, "height": 1000}));
   // pyshell.send("dupa")
@@ -57,10 +58,8 @@ const createRecorderWindow = () => {
   // if (recorderWindow.isEnabled) getWindowCoordinates;
   recorderWindow.on("close", function () {
     // clearInterval(getWindowCoordinates);
-    pyshell.end(function (err, code, signal) {
-      if (err) throw err;
-      log.info("done");
-    });
+    pyshell.kill();
+    log.info("done");
     log.info("closed");
   });
 };
