@@ -4,7 +4,6 @@ const path = require("path");
 const isDev = require("electron-is-dev");
 const { PythonShell } = require("python-shell");
 const log = require("electron-log");
-const { stringify } = require("querystring");
 
 const createRecorderWindow = () => {
   //TODO: check if window can be made click-through but draggable
@@ -15,18 +14,17 @@ const createRecorderWindow = () => {
     alwaysOnTop: true,
     show: false,
     opacity: 0.2,
-    // transparent:true,
     resizable: true,
     frame: true,
     webPreferences: {
       preload: path.join(__dirname, "preloadRecorder.js"),
     },
   });
-  // recorderWindow.setIgnoreMouseEvents(true);
   recorderWindow.menuBarVisible = false;
   recorderWindow.minimizable = false;
   recorderWindow.closable = false;
 
+  
   ipcMain.on("show", (event, data) => recorderWindow.show());
   ipcMain.on("hide", (event, data) => recorderWindow.hide());
 
@@ -36,7 +34,7 @@ const createRecorderWindow = () => {
     pythonPath: "../backend/venv/Scripts/python.exe",
   });
 
-  ipcMain.on("openPythonRenderer", (event, data) => {
+  ipcMain.on("runPythonScript", (event, data) => {
     const [xpos, ypos] = recorderWindow.getPosition();
     const [width, height] = recorderWindow.getSize();
     pyshell
@@ -48,17 +46,11 @@ const createRecorderWindow = () => {
       });
   });
 
-  // pyshell.send(JSON.stringify({"xpos": 5, "ypos":30, "width": 100, "height": 1000}));
-  // pyshell.send("dupa")
-
   pyshell.on("message", function (message) {
-    // log.info(JSON.parse(message));
     log.info(message);
   });
 
-  // if (recorderWindow.isEnabled) getWindowCoordinates;
   recorderWindow.on("hide", function () {
-    // clearInterval(getWindowCoordinates);
     pyshell.kill();
     log.info("done");
     log.info("closed");

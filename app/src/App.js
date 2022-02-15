@@ -22,7 +22,7 @@ const App = () => {
       <Button
         variant="contained"
         onClick={() => {
-          window.ipcRenderer.send("openPythonRenderer");
+          window.ipcRenderer.send("runPythonScript");
         }}
       >
         Run Python!
