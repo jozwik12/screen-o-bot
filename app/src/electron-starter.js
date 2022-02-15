@@ -32,7 +32,7 @@ const createRecorderWindow = () => {
     mode: "text",
     pythonOptions: ["-u"],
     pythonPath:
-      "c:/Users/Jozwik/Projects/screen-o-bot/backend/venv/Scripts/python.exe",
+      "../backend/venv/Scripts/python.exe",
   });
 
   ipcMain.on("openPythonRenderer", (event, data) => {
