@@ -6,10 +6,18 @@ const App = () => {
       <Button
         variant="contained"
         onClick={() => {
-          window.ipcRenderer.send("openRecorder", "true");
+          window.ipcRenderer.send("show");
         }}
       >
-        Hello World!
+        Show
+      </Button>
+      <Button
+        variant="contained"
+        onClick={() => {
+          window.ipcRenderer.send("hide");
+        }}
+      >
+        Hide
       </Button>
       <Button
         variant="contained"

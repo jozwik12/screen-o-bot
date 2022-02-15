@@ -6,9 +6,6 @@ const { PythonShell } = require("python-shell");
 const log = require("electron-log");
 const { stringify } = require("querystring");
 
-ipcMain.on("openRecorder", (event, data) => createRecorderWindow());
-// ipcMain.on("openPythonRenderer", (event, data) => log.info("nothing"));
-
 const createRecorderWindow = () => {
   //TODO: check if window can be made click-through but draggable
   const recorderWindow = new BrowserWindow({
@@ -16,23 +13,26 @@ const createRecorderWindow = () => {
     height: 300,
     title: "recorder",
     alwaysOnTop: true,
+    show: false,
     opacity: 0.2,
     // transparent:true,
     resizable: true,
     frame: true,
     webPreferences: {
-    preload: path.join(__dirname, "preloadRecorder.js"),
+      preload: path.join(__dirname, "preloadRecorder.js"),
     },
   });
   // recorderWindow.setIgnoreMouseEvents(true);
   recorderWindow.menuBarVisible = false;
   recorderWindow.minimizable = false;
 
+  ipcMain.on("show", (event, data) => recorderWindow.show());
+  ipcMain.on("hide", (event, data) => recorderWindow.hide());
+
   let pyshell = new PythonShell("../backend/src/main.py", {
     mode: "text",
     pythonOptions: ["-u"],
-    pythonPath:
-      "../backend/venv/Scripts/python.exe",
+    pythonPath: "../backend/venv/Scripts/python.exe",
   });
 
   ipcMain.on("openPythonRenderer", (event, data) => {
@@ -98,7 +98,7 @@ const createMainWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createMainWindow();
-  // createRecorderWindow();
+  createRecorderWindow();
 
   app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the
