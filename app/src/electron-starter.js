@@ -25,6 +25,7 @@ const createRecorderWindow = () => {
   // recorderWindow.setIgnoreMouseEvents(true);
   recorderWindow.menuBarVisible = false;
   recorderWindow.minimizable = false;
+  recorderWindow.closable = false;
 
   ipcMain.on("show", (event, data) => recorderWindow.show());
   ipcMain.on("hide", (event, data) => recorderWindow.hide());
@@ -56,7 +57,7 @@ const createRecorderWindow = () => {
   });
 
   // if (recorderWindow.isEnabled) getWindowCoordinates;
-  recorderWindow.on("close", function () {
+  recorderWindow.on("hide", function () {
     // clearInterval(getWindowCoordinates);
     pyshell.kill();
     log.info("done");
