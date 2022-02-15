@@ -5,6 +5,8 @@ const isDev = require("electron-is-dev");
 const { PythonShell } = require("python-shell");
 const log = require("electron-log");
 
+let pyshell = null;
+
 const createRecorderWindow = () => {
   //TODO: check if window can be made click-through but draggable
   const recorderWindow = new BrowserWindow({
@@ -24,16 +26,15 @@ const createRecorderWindow = () => {
   recorderWindow.minimizable = false;
   recorderWindow.closable = false;
 
-  
-  ipcMain.on("show", (event, data) => recorderWindow.show());
-  ipcMain.on("hide", (event, data) => recorderWindow.hide());
-
-  let pyshell = new PythonShell("../backend/src/main.py", {
-    mode: "text",
-    pythonOptions: ["-u"],
-    pythonPath: "../backend/venv/Scripts/python.exe",
+  ipcMain.on("show", (event, data) => {
+    recorderWindow.show();
+    pyshell = new PythonShell("../backend/src/main.py", {
+      mode: "text",
+      pythonOptions: ["-u"],
+      pythonPath: "../backend/venv/Scripts/python.exe",
+    });
   });
-
+  
   ipcMain.on("runPythonScript", (event, data) => {
     const [xpos, ypos] = recorderWindow.getPosition();
     const [width, height] = recorderWindow.getSize();
@@ -46,14 +47,11 @@ const createRecorderWindow = () => {
       });
   });
 
-  pyshell.on("message", function (message) {
-    log.info(message);
-  });
-
-  recorderWindow.on("hide", function () {
+  ipcMain.on("hide", (event, data) => {
+    recorderWindow.hide();
     pyshell.kill();
     log.info("done");
-    log.info("closed");
+    pyshell = null;
   });
 };
 
