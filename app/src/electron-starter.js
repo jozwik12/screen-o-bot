@@ -33,8 +33,9 @@ const createRecorderWindow = () => {
       pythonOptions: ["-u"],
       pythonPath: "../backend/venv/Scripts/python.exe",
     });
+    log.info("created");
   });
-  
+
   ipcMain.on("runPythonScript", (event, data) => {
     const [xpos, ypos] = recorderWindow.getPosition();
     const [width, height] = recorderWindow.getSize();
@@ -45,6 +46,7 @@ const createRecorderWindow = () => {
       .end(function (err, code, signal) {
         if (err) throw err;
       });
+    log.info("sent");
   });
 
   ipcMain.on("hide", (event, data) => {
