@@ -25,6 +25,7 @@ const createRecorderWindow = () => {
   recorderWindow.menuBarVisible = false;
   recorderWindow.minimizable = false;
   recorderWindow.closable = false;
+  recorderWindow.loadURL("http://www.google.pl");
 
   ipcMain.on("show", (event, data) => {
     recorderWindow.show();
