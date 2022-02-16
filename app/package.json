@@ -8,7 +8,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "./",
-  "main": "src/electron-starter.js",
+  "main": "public/electron.js",
   "dependencies": {
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
@@ -32,7 +32,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "electron": "electron .",
-    "electron-start": "node src/electron-wait-react",
+    "electron-start": "node public/electron-wait-react",
     "react-start": "react-scripts start",
     "pack": "build --dir",
     "dist": "npm run build && build",
