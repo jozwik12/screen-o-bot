@@ -6,8 +6,9 @@
     "url": "https://github.com/jozwik12/"
   },
   "version": "0.1.0",
-  "private": true,
   "homepage": "./",
+  "license": "GPL-3.0-only",
+  "description": "App making screenshots when screen changes",
   "main": "public/electron.js",
   "dependencies": {
     "@emotion/react": "^11.7.0",
@@ -35,14 +36,17 @@
     "electron-start": "node public/electron-wait-react",
     "react-start": "react-scripts start",
     "pack": "build --dir",
-    "dist": "npm run build && build",
-    "postinstall": "install-app-deps",
-    "deploy": "electron-packager . testowy --platform=win32 --arch=x64"
+    "dist": "npm run build && electron-builder",
+    "postinstall": "install-app-deps"
   },
   "build": {
     "appId": "com.electron.electron-with-create-react-app",
     "win": {
-      "iconUrl": "https://cdn2.iconfinder.com/data/icons/designer-skills/128/react-256.png"
+      "target": "portable"
+    },
+    "portable": {
+      "unicode": false,
+      "artifactName": "my_electron_app.exe"
     },
     "directories": {
       "buildResources": "public"
@@ -68,7 +72,6 @@
   },
   "devDependencies": {
     "electron": "^16.0.2",
-    "electron-builder": "^22.14.5",
-    "electron-packager": "^15.4.0"
+    "electron-builder": "^22.14.5"
   }
 }
