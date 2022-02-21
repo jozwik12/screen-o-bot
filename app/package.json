@@ -40,7 +40,7 @@
     "build": "react-scripts build",
     "build-electron": "robocopy electron build/electron /S",
     "package": "electron-builder build --win -c.extraMetadata.main=build/electron/electron.js --publish never",
-    "dist": "yarn build && yarn package"
+    "dist": "yarn clean && yarn build & yarn build-electron & yarn package"
   },
   "build": {
     "appId": "com.electron.electron-with-create-react-app",
