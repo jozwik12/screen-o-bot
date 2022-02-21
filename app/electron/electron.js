@@ -32,10 +32,10 @@ const createRecorderWindow = () => {
       pythonOptions: ["-u"],
       pythonPath: "./backend/venv/Scripts/python.exe",
     });
-    else pyshell = new PythonShell("./resources/app/build/backend/src/main.py", {
+    else pyshell = new PythonShell("./resources/app.asar.unpacked/build/backend/src/main.py", {
       mode: "text",
       pythonOptions: ["-u"],
-      pythonPath: "./resources/app/build/backend/venv/Scripts/python.exe",
+      pythonPath: "./resources/app.asar.unpacked/build/backend/venv/Scripts/python.exe",
     });
     log.info("created");
   });

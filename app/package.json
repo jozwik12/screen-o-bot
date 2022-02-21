@@ -45,7 +45,9 @@
   },
   "build": {
     "appId": "com.electron.electron-with-create-react-app",
-    "asar": false,
+    "asarUnpack": [
+      "build/backend/**"
+    ],
     "files": [
       "build/**/*",
       "node_modules/**/*"
