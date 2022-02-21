@@ -27,10 +27,15 @@ const createRecorderWindow = () => {
 
   ipcMain.on("show", (event, data) => {
     recorderWindow.show();
-    pyshell = new PythonShell("../backend/src/main.py", {
+    if (isDev) pyshell = new PythonShell("./backend/src/main.py", {
       mode: "text",
       pythonOptions: ["-u"],
-      pythonPath: "../backend/venv/Scripts/python.exe",
+      pythonPath: "./backend/venv/Scripts/python.exe",
+    });
+    else pyshell = new PythonShell("./resources/app/build/backend/src/main.py", {
+      mode: "text",
+      pythonOptions: ["-u"],
+      pythonPath: "./resources/app/build/backend/venv/Scripts/python.exe",
     });
     log.info("created");
   });
