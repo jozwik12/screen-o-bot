@@ -9,7 +9,7 @@
   "homepage": "./",
   "license": "GPL-3.0-only",
   "description": "App making screenshots when screen changes",
-  "main": "public/electron.js",
+  "main": "electron/electron.js",
   "dependencies": {
     "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
@@ -29,27 +29,29 @@
   },
   "scripts": {
     "start": "nf start -p 3000",
-    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
+    "clean": "rmdir build /S /Q & rmdir dist /S /Q",
     "electron": "electron .",
-    "electron-start": "node public/electron-wait-react",
+    "electron-start": "node electron/electron-wait-react",
     "react-start": "react-scripts start",
     "pack": "build --dir",
-    "dist": "npm run build && electron-builder",
-    "postinstall": "install-app-deps"
+    "postinstall": "install-app-deps",
+    "build": "react-scripts build",
+    "build-electron": "robocopy electron build/electron /S",
+    "package": "electron-builder build --win -c.extraMetadata.main=build/electron/electron.js --publish never",
+    "dist": "yarn build && yarn package"
   },
   "build": {
     "appId": "com.electron.electron-with-create-react-app",
-    "win": {
-      "target": "portable"
-    },
-    "portable": {
-      "unicode": false,
-      "artifactName": "my_electron_app.exe"
-    },
-    "directories": {
-      "buildResources": "public"
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "publish": {
+      "provider": "github",
+      "repo": "placeholder",
+      "owner": "jozwik12"
     }
   },
   "eslintConfig": {

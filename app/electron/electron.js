@@ -1,6 +1,7 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
+const url = require('url');
 const isDev = require("electron-is-dev");
 const { PythonShell } = require("python-shell");
 const log = require("electron-log");
@@ -18,9 +19,6 @@ const createRecorderWindow = () => {
     opacity: 0.2,
     resizable: true,
     frame: true,
-    webPreferences: {
-      preload: path.join(__dirname, "preloadRecorder.js"),
-    },
   });
   recorderWindow.menuBarVisible = false;
   recorderWindow.minimizable = false;
@@ -76,13 +74,14 @@ const createMainWindow = () => {
   const startUrl =
     process.env.ELECTRON_START_URL ||
     url.format({
-      pathname: path.join(__dirname, "/../build/index.html"),
+      pathname: path.join(__dirname, "../index.html"),
       protocol: "file:",
       slashes: true,
     });
   if (isDev) mainWindow.loadURL("http://localhost:3000");
   else mainWindow.loadURL(startUrl);
-
+  // mainWindow.loadURL(startUrl);
+  
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 };
