@@ -19,11 +19,8 @@ const createRecorderWindow = () => {
     alwaysOnTop: true,
     show: false,
     opacity: 0.2,
-    resizable: true,
-    frame: true,
   });
   recorderWindow.menuBarVisible = false;
-  recorderWindow.minimizable = true;
   recorderWindow.closable = false;
 
   if (isDev) recorderWindow.loadURL(`file://${path.join(__dirname,"/../public/recorderBackground.html")}`);
