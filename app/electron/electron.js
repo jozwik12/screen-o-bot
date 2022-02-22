@@ -21,7 +21,7 @@ const createRecorderWindow = () => {
     frame: true,
   });
   recorderWindow.menuBarVisible = false;
-  recorderWindow.minimizable = false;
+  recorderWindow.minimizable = true;
   recorderWindow.closable = false;
   recorderWindow.loadURL("http://www.google.pl");
 
