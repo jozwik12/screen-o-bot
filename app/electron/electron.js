@@ -25,7 +25,9 @@ const createRecorderWindow = () => {
   recorderWindow.menuBarVisible = false;
   recorderWindow.minimizable = true;
   recorderWindow.closable = false;
-  recorderWindow.loadURL(`file://${path.join(__dirname,"/../public/recorderBackground.html")}`);
+
+  if (isDev) recorderWindow.loadURL(`file://${path.join(__dirname,"/../public/recorderBackground.html")}`);
+  else recorderWindow.loadURL(`file://${path.join(__dirname,"/../recorderBackground.html")}`);
 
   ipcMain.on("show", () => {
     recorderWindow.show();
