@@ -8,7 +8,7 @@
   "version": "0.1.0",
   "homepage": "./",
   "license": "GPL-3.0-only",
-  "description": "App making screenshots when screen changes",
+  "description": "Screen-o-bot",
   "main": "electron/electron.js",
   "dependencies": {
     "@emotion/react": "^11.7.0",
