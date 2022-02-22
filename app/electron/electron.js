@@ -44,6 +44,7 @@ const createRecorderWindow = () => {
   ipcMain.on("runPythonScript", () => {
     const [xpos, ypos] = recorderWindow.getPosition();
     const [width, height] = recorderWindow.getSize();
+    recorderWindow.hide();
     pyshell
       .send(
         JSON.stringify({ xpos: xpos, ypos: ypos, width: width, height: height })
@@ -55,7 +56,6 @@ const createRecorderWindow = () => {
   });
 
   ipcMain.on("hide", () => {
-    recorderWindow.hide();
     pyshell.kill();
     log.info("done");
     pyshell = null;
