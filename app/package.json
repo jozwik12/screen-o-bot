@@ -56,6 +56,9 @@
       "provider": "github",
       "repo": "placeholder",
       "owner": "jozwik12"
+    },
+    "win": {
+      "target": ["portable"]
     }
   },
   "eslintConfig": {
