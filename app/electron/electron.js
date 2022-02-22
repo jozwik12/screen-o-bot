@@ -25,7 +25,7 @@ const createRecorderWindow = () => {
   recorderWindow.closable = false;
   recorderWindow.loadURL("http://www.google.pl");
 
-  ipcMain.on("show", (event, data) => {
+  ipcMain.on("show", () => {
     recorderWindow.show();
     if (isDev) pyshell = new PythonShell("./backend/src/main.py", {
       mode: "text",
@@ -40,20 +40,20 @@ const createRecorderWindow = () => {
     log.info("created");
   });
 
-  ipcMain.on("runPythonScript", (event, data) => {
+  ipcMain.on("runPythonScript", () => {
     const [xpos, ypos] = recorderWindow.getPosition();
     const [width, height] = recorderWindow.getSize();
     pyshell
       .send(
         JSON.stringify({ xpos: xpos, ypos: ypos, width: width, height: height })
       )
-      .end(function (err, code, signal) {
+      .end(function (err) {
         if (err) throw err;
       });
     log.info("sent");
   });
 
-  ipcMain.on("hide", (event, data) => {
+  ipcMain.on("hide", () => {
     recorderWindow.hide();
     pyshell.kill();
     log.info("done");
