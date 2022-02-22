@@ -88,7 +88,7 @@ const createMainWindow = () => {
   // mainWindow.loadURL(startUrl);
   
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  if (isDev) mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', () => app.exit(0));
 };
