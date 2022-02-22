@@ -25,7 +25,7 @@ const createRecorderWindow = () => {
   recorderWindow.menuBarVisible = false;
   recorderWindow.minimizable = true;
   recorderWindow.closable = false;
-  recorderWindow.loadURL("http://www.google.pl");
+  recorderWindow.loadURL(`file://${path.join(__dirname,"/../public/recorderBackground.html")}`);
 
   ipcMain.on("show", () => {
     recorderWindow.show();
