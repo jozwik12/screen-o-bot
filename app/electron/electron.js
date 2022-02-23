@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const url = require('url');
 const isDev = require("electron-is-dev");
@@ -91,6 +91,13 @@ const createMainWindow = () => {
   
   // Open the DevTools.
   if (isDev) mainWindow.webContents.openDevTools();
+
+  ipcMain.on("select-dirs", async (event, arg) => {
+    const result = await dialog.showOpenDialog(mainWindow, {
+      properties: ['openDirectory']
+    })
+    log.info('directory selected', result.filePaths[0])
+  });
 
   mainWindow.on('closed', () => app.exit(0));
 };
