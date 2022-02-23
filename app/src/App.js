@@ -46,7 +46,7 @@ const App = () => {
         variant="contained"
         component="label"
         onClick={() => {
-          window.ipcRenderer.send("select-dirs");
+          window.ipcRenderer.send("select-save-dir");
         }}
       >
         <FolderRoundedIcon color="primary" fontSize="large" />

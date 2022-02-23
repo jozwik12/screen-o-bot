@@ -92,7 +92,7 @@ const createMainWindow = () => {
   // Open the DevTools.
   if (isDev) mainWindow.webContents.openDevTools();
 
-  ipcMain.on("select-dirs", async (event, arg) => {
+  ipcMain.on("select-save-dir", async (event, arg) => {
     const result = await dialog.showOpenDialog(mainWindow, {
       properties: ['openDirectory']
     })
