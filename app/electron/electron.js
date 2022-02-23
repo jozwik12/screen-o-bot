@@ -76,6 +76,7 @@ const createMainWindow = () => {
     },
   });
 
+  mainWindow.menuBarVisible = isDev
   // load the index.html of the app.
   const startUrl =
     process.env.ELECTRON_START_URL ||
