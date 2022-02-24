@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, dialog } = require("electron");
+const { app, BrowserWindow, ipcMain, dialog, shell } = require("electron");
 const path = require("path");
 const url = require('url');
 const isDev = require("electron-is-dev");
@@ -56,6 +56,7 @@ const createRecorderWindow = () => {
   });
 
   ipcMain.on("hide", () => {
+    shell.openPath("C:/Users/PLEIADES/Desktop/pyscreens")
     pyshell.kill();
     log.info("done");
     pyshell = null;
@@ -94,12 +95,12 @@ const createMainWindow = () => {
 
   ipcMain.on("select-save-dir", async (event, arg) => {
     const result = await dialog.showOpenDialog(mainWindow, {
-      properties: ['openDirectory']
-    })
-    log.info('directory selected', result.filePaths[0])
+      properties: ["openDirectory"],
+    });
+    log.info("directory selected", result.filePaths[0]);
   });
 
-  mainWindow.on('closed', () => app.exit(0));
+  mainWindow.on("closed", () => app.exit(0));
 };
 
 // This method will be called when Electron has finished
