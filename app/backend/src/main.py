@@ -135,18 +135,6 @@ def screen_has_changed():
             time.sleep(0.25)
 
 
-def check_for_program_termination():
-    """
-    pyautogui has FAILSAFE method that when set to True throws FailSafeException if cursor
-    is put in the upper left corner of the screen
-    However, exception is sometimes not thrown
-    This method implements same behaviour, but exception throwing is much more reliable
-    """
-    x, y = gui.position()
-    if x == 1919 and y == 1079:
-        raise gui.FailSafeException
-
-
 def main_loop():
     """
     Main program loop
@@ -157,12 +145,6 @@ def main_loop():
     print("program works")
     while True:
         time.sleep(0.2)
-        try:
-            check_for_program_termination()
-        except gui.FailSafeException:
-            gui.alert(text="Program has been stopped",
-                      title="Program terminated")
-            exit()
         if screen_has_changed() and not sth_excluded_is_on_screen():
             take_screenshot()
             play_notification_sound()
