@@ -1,38 +1,14 @@
-import Button from "@mui/material/Button";
 import VolumeOffRoundedIcon from "@mui/icons-material/VolumeOffRounded";
 import VolumeUpRoundedIcon from "@mui/icons-material/VolumeUpRounded";
 import FolderRoundedIcon from "@mui/icons-material/FolderRounded";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 import IconButton from "@mui/material/IconButton";
+import RecorderButton from "./RecorderButton"
 
 const App = () => {
   return (
     <div>
-      <Button
-        variant="contained"
-        onClick={() => {
-          window.ipcRenderer.send("show");
-        }}
-      >
-        Otwórz okno nagrywania
-      </Button>
-      <Button
-        variant="contained"
-        onClick={() => {
-          window.ipcRenderer.send("runPythonScript");
-        }}
-      >
-        Rozpocznij nagrywanie
-      </Button>
-      <Button
-        variant="contained"
-        onClick={() => {
-          window.ipcRenderer.send("hide");
-        }}
-      >
-        Zatrzymaj nagrywanie
-      </Button>
-
+      <RecorderButton />
       <IconButton>
         <VolumeOffRoundedIcon color="primary" fontSize="large" />
       </IconButton>
