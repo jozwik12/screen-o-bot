@@ -38,6 +38,9 @@ const createRecorderWindow = () => {
       pythonOptions: ["-u"],
       pythonPath: "./resources/app.asar.unpacked/build/backend/venv/Scripts/python.exe",
     });
+    pyshell.on("message", function (message){
+      log.info(message)
+    })
     log.info("created");
   });
 
