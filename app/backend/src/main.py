@@ -21,18 +21,13 @@ comparison_confidence = 0.95
 # Parameter that dictates, how comparison confidence of excluded files to current screen state
 excluded_comparison_confidence = 0.95
 
-# Default folder for screens
-# TODO: some input method instead of hardcoding it
-save_path = os.path.expanduser('~') + r"\Desktop\pyscreens"
-# save_path = os.path.expanduser('~') + r"\OneDrive - Politechnika Wroclawska\II stopien\9 sem\pyscreens"
-# save_path = "D:\OneDrive - Politechnika Wroclawska\II stopien\9 sem\pyscreens"
-
 # Default folder name, set after invoking create_dated_folder() method
 folder_name = ""
 
-# Window coordinates input from node.js
-input_coordinates = json.loads(sys.stdin.readline())
-# input_coordinates = {"xpos": 5, "ypos": 30, "width": 1700, "height": 1020}
+# Data payload from electron
+payload = sys.stdin.readlines()
+screenshot_coordinates = json.loads(payload[0])
+save_path = payload[1].rstrip()
 
 
 def get_main_folder_path():
@@ -81,7 +76,7 @@ def take_screenshot():
     # TODO: implement something to specify screen region instead of hardcoding it
     increment_counter()
     myscreenshot = gui.screenshot(region=(
-        input_coordinates["xpos"], input_coordinates["ypos"], input_coordinates["width"], input_coordinates["height"]))
+        screenshot_coordinates["xpos"], screenshot_coordinates["ypos"], screenshot_coordinates["width"], screenshot_coordinates["height"]))
     myscreenshot.save(save_path + folder_name + fr"\screenshot_{counter}.png")
     time.sleep(time_between_screenshots)
 

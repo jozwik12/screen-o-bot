@@ -7,6 +7,7 @@ const { PythonShell } = require("python-shell");
 const log = require("electron-log");
 
 let pyshell = null;
+let save_path = path.join(app.getPath("home"), "/Desktop/pyscreens/");
 
 const createRecorderWindow = () => {
   //TODO: check if window can be made click-through but draggable
@@ -52,6 +53,7 @@ const createRecorderWindow = () => {
       .send(
         JSON.stringify({ xpos: xpos, ypos: ypos, width: width, height: height })
       )
+      .send(save_path)
       .end(function (err) {
         if (err) throw err;
       });
@@ -59,7 +61,7 @@ const createRecorderWindow = () => {
   });
 
   ipcMain.on("hide", () => {
-    shell.openPath("C:/Users/PLEIADES/Desktop/pyscreens")
+    shell.openPath(save_path)
     pyshell.kill();
     log.info("done");
     pyshell = null;
