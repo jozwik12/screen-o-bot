@@ -1,8 +1,6 @@
-const { ipcRenderer } = require("electron");
-function init() {
-  // add global variables to your web page
-  window.isElectron = true;
-  window.ipcRenderer = ipcRenderer;
-}
+const { ipcRenderer, contextBridge, screen } = require("electron");
 
-init();
+contextBridge.exposeInMainWorld("ipcRenderer", {
+  send: (message) => ipcRenderer.send(message),
+  invoke: (message) => ipcRenderer.invoke(message),
+});
