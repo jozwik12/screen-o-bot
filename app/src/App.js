@@ -3,9 +3,18 @@ import VolumeUpRoundedIcon from "@mui/icons-material/VolumeUpRounded";
 import FolderRoundedIcon from "@mui/icons-material/FolderRounded";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 import IconButton from "@mui/material/IconButton";
-import RecorderButton from "./RecorderButton"
+import RecorderButton from "./RecorderButton";
+import TextField from "@mui/material/TextField";
+import { useState } from "react";
 
 const App = () => {
+  
+  let [savePath, setSavePath] = useState("defaultPath");
+
+  const getSavePathFromMainProcess = async () => {
+    setSavePath(await window.ipcRenderer.invoke("select-save-dir"));
+  };
+
   return (
     <div>
       <RecorderButton />
@@ -18,12 +27,18 @@ const App = () => {
       <IconButton>
         <HelpOutlineRoundedIcon color="primary" fontSize="large" />
       </IconButton>
+      <TextField
+        id="filled-hidden-label-small"
+        size="small"
+        value={savePath}
+        disabled
+        fullWidth
+        helperText="Folder zapisu"
+      ></TextField>
       <IconButton
         variant="contained"
         component="label"
-        onClick={() => {
-          window.ipcRenderer.send("select-save-dir");
-        }}
+        onClick={getSavePathFromMainProcess}
       >
         <FolderRoundedIcon color="primary" fontSize="large" />
       </IconButton>

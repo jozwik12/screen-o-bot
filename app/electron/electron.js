@@ -9,6 +9,16 @@ const log = require("electron-log");
 let pyshell = null;
 let save_path = path.join(app.getPath("home"), "/Desktop/pyscreens/");
 
+const selectSaveDir =  async (event, arg) => {
+  temp = await dialog.showOpenDialog({
+    properties: ["openDirectory"],
+  });
+  save_path = temp.filePaths[0]
+  return save_path
+  // event.returnValue = save_path
+  // log.info("directory selected", save_path.filePaths[0]);
+};
+
 const createRecorderWindow = () => {
   //TODO: check if window can be made click-through but draggable
   const recorderWindow = new BrowserWindow({
@@ -98,13 +108,6 @@ const createMainWindow = () => {
   // Open the DevTools.
   if (isDev) mainWindow.webContents.openDevTools();
 
-  ipcMain.on("select-save-dir", async (event, arg) => {
-    const result = await dialog.showOpenDialog(mainWindow, {
-      properties: ["openDirectory"],
-    });
-    log.info("directory selected", result.filePaths[0]);
-  });
-
   mainWindow.on("closed", () => app.exit(0));
 };
 
@@ -112,6 +115,7 @@ const createMainWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  ipcMain.handle("select-save-dir", selectSaveDir)
   createMainWindow();
   createRecorderWindow();
 
