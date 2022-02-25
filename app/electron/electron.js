@@ -9,6 +9,10 @@ const log = require("electron-log");
 let pyshell = null;
 let savePath = path.join(app.getPath("home"), "/Desktop/pyscreens/");
 
+const getDefaultSaveDirectory = () => {
+  return savePath;
+};
+
 const selectSaveDir = async (event, arg) => {
   temp = await dialog.showOpenDialog({
     properties: ["openDirectory"],
@@ -126,6 +130,7 @@ const createMainWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   ipcMain.handle("select-save-dir", selectSaveDir);
+  ipcMain.handle("get-home-dir", getDefaultSaveDirectory);
   createMainWindow();
   createRecorderWindow();
 

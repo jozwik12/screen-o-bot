@@ -8,12 +8,17 @@ import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
 const App = () => {
-  
-  let [savePath, setSavePath] = useState("defaultPath");
+  let [savePath, setSavePath] = useState("");
+
+  const getDefaultSavePath = async () => {
+    setSavePath(await window.ipcRenderer.invoke("get-home-dir"));
+  };
 
   const getSavePathFromMainProcess = async () => {
     setSavePath(await window.ipcRenderer.invoke("select-save-dir"));
   };
+
+  getDefaultSavePath();
 
   return (
     <div>
