@@ -1,26 +1,23 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain, dialog, shell } = require("electron");
 const path = require("path");
-const url = require('url');
+const url = require("url");
 const isDev = require("electron-is-dev");
 const { PythonShell } = require("python-shell");
 const log = require("electron-log");
 
 let pyshell = null;
-let save_path = path.join(app.getPath("home"), "/Desktop/pyscreens/");
+let savePath = path.join(app.getPath("home"), "/Desktop/pyscreens/");
 
-const selectSaveDir =  async (event, arg) => {
+const selectSaveDir = async (event, arg) => {
   temp = await dialog.showOpenDialog({
     properties: ["openDirectory"],
   });
-  save_path = temp.filePaths[0]
-  return save_path
-  // event.returnValue = save_path
-  // log.info("directory selected", save_path.filePaths[0]);
+  savePath = temp.filePaths[0];
+  return savePath;
 };
 
 const createRecorderWindow = () => {
-  //TODO: check if window can be made click-through but draggable
   const recorderWindow = new BrowserWindow({
     width: 400,
     height: 300,
@@ -34,24 +31,36 @@ const createRecorderWindow = () => {
   recorderWindow.menuBarVisible = false;
   recorderWindow.closable = false;
 
-  if (isDev) recorderWindow.loadURL(`file://${path.join(__dirname,"/../public/recorderBackground.html")}`);
-  else recorderWindow.loadURL(`file://${path.join(__dirname,"/../recorderBackground.html")}`);
+  if (isDev)
+    recorderWindow.loadURL(
+      `file://${path.join(__dirname, "/../public/recorderBackground.html")}`
+    );
+  else
+    recorderWindow.loadURL(
+      `file://${path.join(__dirname, "/../recorderBackground.html")}`
+    );
 
   ipcMain.on("show", () => {
     recorderWindow.show();
-    if (isDev) pyshell = new PythonShell("./backend/src/main.py", {
-      mode: "text",
-      pythonOptions: ["-u"],
-      pythonPath: "./backend/venv/Scripts/python.exe",
+    if (isDev)
+      pyshell = new PythonShell("./backend/src/main.py", {
+        mode: "text",
+        pythonOptions: ["-u"],
+        pythonPath: "./backend/venv/Scripts/python.exe",
+      });
+    else
+      pyshell = new PythonShell(
+        "./resources/app.asar.unpacked/build/backend/src/main.py",
+        {
+          mode: "text",
+          pythonOptions: ["-u"],
+          pythonPath:
+            "./resources/app.asar.unpacked/build/backend/venv/Scripts/python.exe",
+        }
+      );
+    pyshell.on("message", function (message) {
+      log.info(message);
     });
-    else pyshell = new PythonShell("./resources/app.asar.unpacked/build/backend/src/main.py", {
-      mode: "text",
-      pythonOptions: ["-u"],
-      pythonPath: "./resources/app.asar.unpacked/build/backend/venv/Scripts/python.exe",
-    });
-    pyshell.on("message", function (message){
-      log.info(message)
-    })
     log.info("created");
   });
 
@@ -63,7 +72,7 @@ const createRecorderWindow = () => {
       .send(
         JSON.stringify({ xpos: xpos, ypos: ypos, width: width, height: height })
       )
-      .send(save_path)
+      .send(savePath)
       .end(function (err) {
         if (err) throw err;
       });
@@ -71,7 +80,7 @@ const createRecorderWindow = () => {
   });
 
   ipcMain.on("hide", () => {
-    shell.openPath(save_path)
+    shell.openPath(savePath);
     pyshell.kill();
     log.info("done");
     pyshell = null;
@@ -92,7 +101,7 @@ const createMainWindow = () => {
     },
   });
 
-  mainWindow.menuBarVisible = isDev
+  mainWindow.menuBarVisible = isDev;
   // load the index.html of the app.
   const startUrl =
     process.env.ELECTRON_START_URL ||
@@ -103,8 +112,7 @@ const createMainWindow = () => {
     });
   if (isDev) mainWindow.loadURL("http://localhost:3000");
   else mainWindow.loadURL(startUrl);
-  // mainWindow.loadURL(startUrl);
-  
+
   // Open the DevTools.
   if (isDev) mainWindow.webContents.openDevTools();
 
@@ -115,7 +123,7 @@ const createMainWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  ipcMain.handle("select-save-dir", selectSaveDir)
+  ipcMain.handle("select-save-dir", selectSaveDir);
   createMainWindow();
   createRecorderWindow();
 
