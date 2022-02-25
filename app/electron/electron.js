@@ -40,6 +40,8 @@ const createRecorderWindow = () => {
       `file://${path.join(__dirname, "/../recorderBackground.html")}`
     );
 
+  let savePathWithDatedFolder;
+
   ipcMain.on("show", () => {
     recorderWindow.show();
     if (isDev)
@@ -59,6 +61,7 @@ const createRecorderWindow = () => {
         }
       );
     pyshell.on("message", function (message) {
+      savePathWithDatedFolder = message
       log.info(message);
     });
     log.info("created");
@@ -80,7 +83,7 @@ const createRecorderWindow = () => {
   });
 
   ipcMain.on("hide", () => {
-    shell.openPath(savePath);
+    shell.openPath(savePathWithDatedFolder);
     pyshell.kill();
     log.info("done");
     pyshell = null;

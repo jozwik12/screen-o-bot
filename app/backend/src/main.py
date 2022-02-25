@@ -137,7 +137,6 @@ def main_loop():
     """
     create_dated_folder()
     take_screenshot()
-    print("program works")
     while True:
         time.sleep(0.2)
         if screen_has_changed() and not sth_excluded_is_on_screen():
