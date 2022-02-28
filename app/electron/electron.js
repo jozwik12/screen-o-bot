@@ -1,5 +1,12 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, dialog, shell } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  dialog,
+  shell,
+  screen,
+} = require("electron");
 const path = require("path");
 const url = require("url");
 const isDev = require("electron-is-dev");
@@ -20,6 +27,10 @@ const selectSaveDir = async (event, arg) => {
   });
   savePath = temp.filePaths[0];
   return savePath;
+};
+
+const getMonitorAmount = () => {
+  return screen.getAllDisplays().length;
 };
 
 const createRecorderWindow = () => {
@@ -149,6 +160,7 @@ const createMainWindow = () => {
 app.whenReady().then(() => {
   ipcMain.handle("select-save-dir", selectSaveDir);
   ipcMain.handle("get-default-save-path", getDefaultSaveDirectory);
+  ipcMain.handle("monitor-amount", getMonitorAmount);
   createMainWindow();
   createRecorderWindow();
 

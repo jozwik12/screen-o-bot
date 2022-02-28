@@ -4,11 +4,13 @@ import FolderRoundedIcon from "@mui/icons-material/FolderRounded";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 import IconButton from "@mui/material/IconButton";
 import RecorderButton from "./RecorderButton";
+import MonitorWarning from "./MonitorWarning";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 
 const App = () => {
   let [savePath, setSavePath] = useState("");
+  let [monitorAmount, setMonitorAmount] = useState(0);
 
   const getDefaultSavePath = async () => {
     setSavePath(await window.ipcRenderer.invoke("get-default-save-path"));
@@ -21,8 +23,13 @@ const App = () => {
     }
   };
 
+  const getMonitorAmount = async () => {
+    setMonitorAmount(await window.ipcRenderer.invoke("monitor-amount"));
+  };
+
   useEffect(() => {
     getDefaultSavePath();
+    getMonitorAmount();
   }, []);
 
   return (
@@ -52,6 +59,7 @@ const App = () => {
       >
         <FolderRoundedIcon color="primary" fontSize="large" />
       </IconButton>
+      <MonitorWarning monitorAmount={monitorAmount}></MonitorWarning>
     </div>
   );
 };
