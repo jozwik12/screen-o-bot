@@ -3,10 +3,10 @@ const { app, BrowserWindow, ipcMain, dialog, shell } = require("electron");
 const path = require("path");
 const url = require("url");
 const isDev = require("electron-is-dev");
-const { PythonShell } = require("python-shell");
+const { execFile } = require("child_process");
 const log = require("electron-log");
 
-let pyshell = null;
+let child = null;
 let savePath = path.join(app.getPath("home"), "/Desktop/pyscreens/");
 
 const getDefaultSaveDirectory = () => {
@@ -48,26 +48,6 @@ const createRecorderWindow = () => {
 
   ipcMain.on("show", () => {
     recorderWindow.show();
-    if (isDev)
-      pyshell = new PythonShell("./backend/src/main.py", {
-        mode: "text",
-        pythonOptions: ["-u"],
-        pythonPath: "./backend/venv/Scripts/python.exe",
-      });
-    else
-      pyshell = new PythonShell(
-        "./resources/app.asar.unpacked/build/backend/src/main.py",
-        {
-          mode: "text",
-          pythonOptions: ["-u"],
-          pythonPath:
-            "./resources/app.asar.unpacked/build/backend/venv/Scripts/python.exe",
-        }
-      );
-    pyshell.on("message", function (message) {
-      savePathWithDatedFolder = message
-      log.info(message);
-    });
     log.info("created");
   });
 
@@ -75,22 +55,45 @@ const createRecorderWindow = () => {
     const [xpos, ypos] = recorderWindow.getPosition();
     const [width, height] = recorderWindow.getSize();
     recorderWindow.hide();
-    pyshell
-      .send(
-        JSON.stringify({ xpos: xpos, ypos: ypos, width: width, height: height })
-      )
-      .send(savePath)
-      .end(function (err) {
-        if (err) throw err;
-      });
+    if (isDev)
+      child = execFile(
+        "./backend/src/dist/main/main.exe",
+        ["-u"],
+        (error, stdout, stderr) => {
+          if (error) {
+            console.log(error);
+          }
+          savePathWithDatedFolder = path.join(stdout);
+          shell.openPath(savePathWithDatedFolder);
+        }
+      );
+    else
+      child = execFile(
+        "./resources/app.asar.unpacked/build/backend/src/dist/main/main.exe",
+        ["-u"],
+        (error, stdout, stderr) => {
+          if (error) {
+            console.log(error);
+          }
+          savePathWithDatedFolder = path.join(stdout);
+          shell.openPath(savePathWithDatedFolder);
+        }
+      );
+    // pyshell
+    //   .send(
+    //     JSON.stringify({ xpos: xpos, ypos: ypos, width: width, height: height })
+    //   )
+    //   .send(savePath)
+    //   .end(function (err) {
+    //     if (err) throw err;
+    //   });
     log.info("sent");
   });
 
   ipcMain.on("hide", () => {
-    shell.openPath(savePathWithDatedFolder);
-    pyshell.kill();
+    child.kill();
     log.info("done");
-    pyshell = null;
+    child = null;
   });
 };
 
