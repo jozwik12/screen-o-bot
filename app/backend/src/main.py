@@ -25,17 +25,9 @@ excluded_comparison_confidence = 0.95
 folder_name = ""
 
 # Data payload from electron
-# payload = sys.stdin.readlines()
-# screenshot_coordinates = json.loads(payload[0])
-screenshot_coordinates = {"xpos": 5, "ypos": 30, "width": 1700, "height": 1020}
-# save_path = payload[1].rstrip()
-save_path = os.path.expanduser('~') + r"\Desktop\pyscreens"
-
-
-def get_main_folder_path():
-    main_path = os.path.realpath(__file__).split("\\")
-    main_path = main_path[:-2]
-    return "\\".join(main_path)
+payload = sys.stdin.read().split()
+screenshot_coordinates = json.loads(payload[0])
+save_path = payload[1]
 
 
 def create_dated_folder():

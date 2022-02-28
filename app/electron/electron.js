@@ -55,7 +55,7 @@ const createRecorderWindow = () => {
     const [xpos, ypos] = recorderWindow.getPosition();
     const [width, height] = recorderWindow.getSize();
     recorderWindow.hide();
-    if (isDev)
+    if (isDev) {
       child = execFile(
         "./backend/src/dist/main/main.exe",
         ["-u"],
@@ -67,7 +67,7 @@ const createRecorderWindow = () => {
           shell.openPath(savePathWithDatedFolder);
         }
       );
-    else
+    } else {
       child = execFile(
         "./resources/app.asar.unpacked/build/backend/src/dist/main/main.exe",
         ["-u"],
@@ -79,14 +79,12 @@ const createRecorderWindow = () => {
           shell.openPath(savePathWithDatedFolder);
         }
       );
-    // pyshell
-    //   .send(
-    //     JSON.stringify({ xpos: xpos, ypos: ypos, width: width, height: height })
-    //   )
-    //   .send(savePath)
-    //   .end(function (err) {
-    //     if (err) throw err;
-    //   });
+    }
+
+    child.stdin.write(JSON.stringify({ xpos: xpos, ypos: ypos, width: width, height: height }) + "\n" + savePath);
+    child.stdin.end(function (err) {
+      if (err) throw err;
+    });
     log.info("sent");
   });
 
