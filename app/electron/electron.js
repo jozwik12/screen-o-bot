@@ -6,6 +6,7 @@ const isDev = require("electron-is-dev");
 const { execFile } = require("child_process");
 const log = require("electron-log");
 
+//References for shared variables
 let child = null;
 let savePath = path.join(app.getPath("home"), "/Desktop/pyscreens/");
 
@@ -81,8 +82,12 @@ const createRecorderWindow = () => {
       );
     }
 
-    child.stdin.write(JSON.stringify({ xpos: xpos, ypos: ypos, width: width, height: height }) + "\n" + savePath);
-    child.stdin.end(function (err) {
+    child.stdin.write(
+      JSON.stringify({ xpos: xpos, ypos: ypos, width: width, height: height }) +
+        "\n" +
+        savePath
+    );
+    child.stdin.end((err) => {
       if (err) throw err;
     });
     log.info("sent");
@@ -109,7 +114,6 @@ const createMainWindow = () => {
     },
   });
 
-  mainWindow.menuBarVisible = isDev;
   // load the index.html of the app.
   const startUrl =
     process.env.ELECTRON_START_URL ||
@@ -121,8 +125,8 @@ const createMainWindow = () => {
   if (isDev) mainWindow.loadURL("http://localhost:3000");
   else mainWindow.loadURL(startUrl);
 
-  // Open the DevTools.
   if (isDev) mainWindow.webContents.openDevTools();
+  mainWindow.menuBarVisible = isDev;
 
   mainWindow.on("closed", () => app.exit(0));
 };
@@ -132,11 +136,11 @@ const createMainWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   ipcMain.handle("select-save-dir", selectSaveDir);
-  ipcMain.handle("get-home-dir", getDefaultSaveDirectory);
+  ipcMain.handle("get-default-save-path", getDefaultSaveDirectory);
   createMainWindow();
   createRecorderWindow();
 
-  app.on("activate", function () {
+  app.on("activate", () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -148,7 +152,7 @@ app.whenReady().then(() => {
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
-app.on("window-all-closed", function () {
+app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
 

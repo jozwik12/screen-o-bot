@@ -11,7 +11,7 @@ const App = () => {
   let [savePath, setSavePath] = useState("");
 
   const getDefaultSavePath = async () => {
-    setSavePath(await window.ipcRenderer.invoke("get-home-dir"));
+    setSavePath(await window.ipcRenderer.invoke("get-default-save-path"));
   };
 
   const getSavePathFromMainProcess = async () => {

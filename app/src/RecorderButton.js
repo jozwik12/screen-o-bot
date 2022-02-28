@@ -2,15 +2,15 @@ import Button from "@mui/material/Button";
 import { useState } from "react";
 
 const RecorderButton = () => {
-  const [index, setIndex] = useState(0);
-  switch (index) {
+  const [recorderButtonIndex, setRecorderButtonIndex] = useState(0);
+  switch (recorderButtonIndex) {
     case 0:
       return (
         <Button
           variant="contained"
           onClick={() => {
             window.ipcRenderer.send("show");
-            setIndex(1);
+            setRecorderButtonIndex(1);
           }}
         >
           Otwórz okno nagrywania
@@ -22,7 +22,7 @@ const RecorderButton = () => {
           variant="contained"
           onClick={() => {
             window.ipcRenderer.send("runPythonScript");
-            setIndex(2);
+            setRecorderButtonIndex(2);
           }}
         >
           Rozpocznij nagrywanie
@@ -34,7 +34,7 @@ const RecorderButton = () => {
           variant="contained"
           onClick={() => {
             window.ipcRenderer.send("hide");
-            setIndex(0);
+            setRecorderButtonIndex(0);
           }}
         >
           Zatrzymaj nagrywanie
