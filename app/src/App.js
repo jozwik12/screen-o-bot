@@ -5,7 +5,7 @@ import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 import IconButton from "@mui/material/IconButton";
 import RecorderButton from "./RecorderButton";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
   let [savePath, setSavePath] = useState("");
@@ -15,10 +15,15 @@ const App = () => {
   };
 
   const getSavePathFromMainProcess = async () => {
-    setSavePath(await window.ipcRenderer.invoke("select-save-dir"));
+    const newPath = await window.ipcRenderer.invoke("select-save-dir");
+    if (newPath) {
+      setSavePath(newPath);
+    }
   };
 
-  getDefaultSavePath();
+  useEffect(() => {
+    getDefaultSavePath();
+  }, []);
 
   return (
     <div>
