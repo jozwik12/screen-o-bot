@@ -53,6 +53,13 @@ const createRecorderWindow = () => {
   });
 
   ipcMain.on("runPythonScript", () => {
+    const frameWidth = 3;
+    const offset = {
+      x: 18 + frameWidth,
+      y: 41 + frameWidth,
+      w: 18 + 18 + 2 * frameWidth,
+      h: 18 + 41 + 2 * frameWidth,
+    };
     const [xpos, ypos] = recorderWindow.getPosition();
     const [width, height] = recorderWindow.getSize();
     recorderWindow.hide();
@@ -83,7 +90,12 @@ const createRecorderWindow = () => {
     }
 
     child.stdin.write(
-      JSON.stringify({ xpos: xpos, ypos: ypos, width: width, height: height }) +
+      JSON.stringify({
+        xpos: xpos + offset.x,
+        ypos: ypos + offset.y,
+        width: width - offset.w,
+        height: height - offset.h,
+      }) +
         "\n" +
         savePath
     );
