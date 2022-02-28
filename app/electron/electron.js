@@ -69,7 +69,7 @@ const createRecorderWindow = () => {
       );
     } else {
       child = execFile(
-        "./resources/app.asar.unpacked/build/backend/src/dist/main/main.exe",
+        "./resources/app.asar.unpacked/build/main/main.exe",
         ["-u"],
         (error, stdout, stderr) => {
           if (error) {
