@@ -25,31 +25,17 @@ excluded_comparison_confidence = 0.95
 folder_name = ""
 
 # Data payload from electron
-payload = sys.stdin.readlines()
-screenshot_coordinates = json.loads(payload[0])
-save_path = payload[1].rstrip()
+# payload = sys.stdin.readlines()
+# screenshot_coordinates = json.loads(payload[0])
+screenshot_coordinates = {"xpos": 5, "ypos": 30, "width": 1700, "height": 1020}
+# save_path = payload[1].rstrip()
+save_path = os.path.expanduser('~') + r"\Desktop\pyscreens"
 
 
 def get_main_folder_path():
     main_path = os.path.realpath(__file__).split("\\")
     main_path = main_path[:-2]
     return "\\".join(main_path)
-
-
-def get_excluded_path():
-    excluded_path = get_main_folder_path() + r"\excluded"
-    return excluded_path
-
-
-def list_excluded_files():
-    list_temp = [f for f in os.listdir(get_excluded_path())
-                 if os.path.isfile(os.path.join(get_excluded_path(), f))]
-    list_temp = [get_excluded_path() + "\\" + elem for elem in list_temp]
-    return list_temp
-
-
-# Make list of excluded files constant to improve performance
-list_of_excluded_files = list_excluded_files()
 
 
 def create_dated_folder():
@@ -100,18 +86,6 @@ def increment_counter():
     counter = str(counter).zfill(4)
 
 
-def sth_excluded_is_on_screen():
-    global list_of_excluded_files
-    for excluded_elem in list_of_excluded_files:
-        try:
-            loc = gui.locateOnScreen(
-                excluded_elem, confidence=excluded_comparison_confidence)
-            return bool(loc)
-        except gui.ImageNotFoundException:
-            pass
-    return False
-
-
 def screen_has_changed():
     """
     Checks if current screen state is similar to latest screenshot
@@ -139,7 +113,7 @@ def main_loop():
     take_screenshot()
     while True:
         time.sleep(0.2)
-        if screen_has_changed() and not sth_excluded_is_on_screen():
+        if screen_has_changed():
             take_screenshot()
             play_notification_sound()
 
