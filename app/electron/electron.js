@@ -104,6 +104,7 @@ const createMainWindow = () => {
       preload: path.join(__dirname, "preload.js"),
       nativeWindowOpen: true,
       nodeIntegration: true,
+      contextIsolation: false,
     },
   });
 
