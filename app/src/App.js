@@ -3,7 +3,12 @@ import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 import IconButton from "@mui/material/IconButton";
 import RecorderButton from "./RecorderButton";
 import MonitorWarning from "./MonitorWarning";
+import Disclaimer from "./Disclaimer";
 import TextField from "@mui/material/TextField";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 import { useEffect, useState } from "react";
 
 const App = () => {
@@ -52,6 +57,8 @@ const App = () => {
         <FolderRoundedIcon color="primary" fontSize="large" />
       </IconButton>
       <MonitorWarning monitorAmount={monitorAmount}></MonitorWarning>
+      <Disclaimer />
+
     </div>
   );
 };
