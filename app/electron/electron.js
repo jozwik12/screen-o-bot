@@ -16,6 +16,12 @@ const log = require("electron-log");
 //References for shared variables
 let child = null;
 let savePath = path.join(app.getPath("home"), "/Desktop/pyscreens/");
+const pythonScriptPath = isDev
+  ? "./backend/src/dist/main/main.exe"
+  : "./resources/app.asar.unpacked/build/main/main.exe";
+const recorderBackgroundPath = isDev
+  ? `file://${path.join(__dirname, "/../public/recorderBackground.html")}`
+  : `file://${path.join(__dirname, "/../recorderBackground.html")}`;
 
 const getDefaultSaveDirectory = () => {
   return savePath;
@@ -46,14 +52,7 @@ const createRecorderWindow = () => {
   recorderWindow.menuBarVisible = false;
   recorderWindow.closable = false;
 
-  if (isDev)
-    recorderWindow.loadURL(
-      `file://${path.join(__dirname, "/../public/recorderBackground.html")}`
-    );
-  else
-    recorderWindow.loadURL(
-      `file://${path.join(__dirname, "/../recorderBackground.html")}`
-    );
+  recorderWindow.loadURL(recorderBackgroundPath);
 
   let savePathWithDatedFolder;
 
@@ -73,31 +72,14 @@ const createRecorderWindow = () => {
     const [xpos, ypos] = recorderWindow.getPosition();
     const [width, height] = recorderWindow.getSize();
     recorderWindow.hide();
-    if (isDev) {
-      child = execFile(
-        "./backend/src/dist/main/main.exe",
-        ["-u"],
-        (error, stdout, stderr) => {
-          if (error) {
-            console.log(error);
-          }
-          savePathWithDatedFolder = path.join(stdout);
-          shell.openPath(savePathWithDatedFolder);
-        }
-      );
-    } else {
-      child = execFile(
-        "./resources/app.asar.unpacked/build/main/main.exe",
-        ["-u"],
-        (error, stdout, stderr) => {
-          if (error) {
-            console.log(error);
-          }
-          savePathWithDatedFolder = path.join(stdout);
-          shell.openPath(savePathWithDatedFolder);
-        }
-      );
-    }
+
+    child = execFile(pythonScriptPath, ["-u"], (error, stdout, stderr) => {
+      if (error) {
+        console.log(error);
+      }
+      savePathWithDatedFolder = path.join(stdout);
+      shell.openPath(savePathWithDatedFolder);
+    });
 
     child.stdin.write(
       JSON.stringify({
