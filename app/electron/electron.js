@@ -40,9 +40,8 @@ const createRecorderWindow = () => {
     minWidth: 400,
     minHeight: 300,
     title: "recorder",
-    alwaysOnTop: true,
     show: false,
-    opacity: 0.2,
+    opacity: 0.75,
   });
   recorderWindow.menuBarVisible = false;
   recorderWindow.closable = false;
