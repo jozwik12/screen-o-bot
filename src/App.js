@@ -11,6 +11,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { useEffect, useState } from "react";
 import ProjectInfo from "./ProjectInfo";
+import { Grid } from "@mui/material";
 
 const App = () => {
   let [savePath, setSavePath] = useState("");
@@ -37,30 +38,44 @@ const App = () => {
   }, []);
 
   return (
-    <div>
-      <RecorderButton />
-      <IconButton>
-        <HelpOutlineIcon color="primary" fontSize="large" />
-      </IconButton>
-      <TextField
-        id="filled-hidden-label-small"
-        size="small"
-        value={savePath}
-        disabled
-        fullWidth
-        helperText="Folder zapisu"
-      ></TextField>
-      <IconButton
-        variant="contained"
-        component="label"
-        onClick={getSavePathFromMainProcess}
-      >
-        <FolderRoundedIcon color="primary" fontSize="large" />
-      </IconButton>
-      <MonitorWarning monitorAmount={monitorAmount}></MonitorWarning>
-      <Disclaimer />
-      <ProjectInfo />
-    </div>
+    <Grid container spacing={2}>
+      <Grid item xs={10}>
+        <RecorderButton />
+      </Grid>
+      <Grid item xs={1}>
+        <IconButton>
+          <HelpOutlineIcon color="primary" fontSize="large" />
+        </IconButton>
+      </Grid>
+      <Grid item xs={1}>
+        <ProjectInfo />
+      </Grid>
+      <Grid item xs={11}>
+        <TextField
+          id="filled-hidden-label-small"
+          size="small"
+          value={savePath}
+          disabled
+          fullWidth
+          helperText="Folder zapisu"
+        ></TextField>
+      </Grid>
+      <Grid item xs={1}>
+        <IconButton
+          variant="contained"
+          component="label"
+          onClick={getSavePathFromMainProcess}
+        >
+          <FolderRoundedIcon color="primary" fontSize="large" />
+        </IconButton>
+      </Grid>
+      <Grid item xs={12}>
+        <MonitorWarning monitorAmount={monitorAmount}></MonitorWarning>
+      </Grid>
+      <Grid item xs={12}>
+        <Disclaimer />
+      </Grid>
+    </Grid>
   );
 };
 
