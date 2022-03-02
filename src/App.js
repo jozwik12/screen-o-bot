@@ -1,5 +1,6 @@
 import FolderRoundedIcon from "@mui/icons-material/FolderRounded";
-import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import IconButton from "@mui/material/IconButton";
 import RecorderButton from "./RecorderButton";
 import MonitorWarning from "./MonitorWarning";
@@ -39,7 +40,10 @@ const App = () => {
     <div>
       <RecorderButton />
       <IconButton>
-        <HelpOutlineRoundedIcon color="primary" fontSize="large" />
+        <HelpOutlineIcon color="primary" fontSize="large" />
+      </IconButton>
+      <IconButton>
+        <InfoOutlinedIcon color="primary" fontSize="large" />
       </IconButton>
       <TextField
         id="filled-hidden-label-small"
