@@ -117,6 +117,10 @@ const createMainWindow = () => {
       contextIsolation: false,
     },
   });
+  mainWindow.webContents.on('new-window', function(e, url) {
+    e.preventDefault();
+    shell.openExternal(url);
+  });
 
   // load the index.html of the app.
   const startUrl =
