@@ -1,16 +1,16 @@
 import FolderRoundedIcon from "@mui/icons-material/FolderRounded";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import IconButton from "@mui/material/IconButton";
 import RecorderButton from "./RecorderButton";
 import MonitorWarning from "./MonitorWarning";
 import Disclaimer from "./Disclaimer";
 import TextField from "@mui/material/TextField";
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 import { useEffect, useState } from "react";
+import ProjectInfo from "./ProjectInfo";
 
 const App = () => {
   let [savePath, setSavePath] = useState("");
@@ -42,9 +42,6 @@ const App = () => {
       <IconButton>
         <HelpOutlineIcon color="primary" fontSize="large" />
       </IconButton>
-      <IconButton>
-        <InfoOutlinedIcon color="primary" fontSize="large" />
-      </IconButton>
       <TextField
         id="filled-hidden-label-small"
         size="small"
@@ -62,7 +59,7 @@ const App = () => {
       </IconButton>
       <MonitorWarning monitorAmount={monitorAmount}></MonitorWarning>
       <Disclaimer />
-
+      <ProjectInfo />
     </div>
   );
 };
