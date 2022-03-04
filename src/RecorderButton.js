@@ -4,12 +4,22 @@ import CircleIcon from "@mui/icons-material/Circle";
 import StopCircleIcon from "@mui/icons-material/StopCircle";
 import { useState } from "react";
 
+const buttonStyle = {
+  display: "flex",
+  alignItems: "center",
+  fontWeight: "bold",
+  fontSize: 14,
+  width: 300,
+  border: 2,
+};
+
 const RecorderButton = () => {
   const [recorderButtonIndex, setRecorderButtonIndex] = useState(0);
   switch (recorderButtonIndex) {
     case 0:
       return (
         <Button
+          sx={buttonStyle}
           variant="contained"
           endIcon={<LaunchIcon />}
           onClick={() => {
@@ -23,6 +33,7 @@ const RecorderButton = () => {
     case 1:
       return (
         <Button
+          sx={buttonStyle}
           variant="contained"
           endIcon={<CircleIcon />}
           onClick={() => {
@@ -36,6 +47,7 @@ const RecorderButton = () => {
     case 2:
       return (
         <Button
+          sx={buttonStyle}
           variant="contained"
           endIcon={<StopCircleIcon />}
           onClick={() => {
