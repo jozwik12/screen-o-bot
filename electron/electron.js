@@ -110,6 +110,7 @@ const createMainWindow = () => {
     width: 800,
     height: 600,
     title: "Loading...",
+    alwaysOnTop: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nativeWindowOpen: true,
