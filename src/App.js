@@ -45,7 +45,7 @@ const App = () => {
         display: "flex",
         alignContent: "center",
         justifyContent: "flex-start",
-        width: 500,
+        width: 496,
         p: "2px",
         gap: "8px",
       }}
@@ -76,7 +76,7 @@ const App = () => {
           value={savePath}
           disabled
           helperText="Folder zapisu"
-          sx={{ width: 496 }}
+          sx={{ width: 460 }}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end" sx={{ p: 0 }}>

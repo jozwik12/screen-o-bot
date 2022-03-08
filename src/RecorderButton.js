@@ -9,7 +9,7 @@ const buttonStyle = {
   alignItems: "center",
   fontWeight: "bold",
   fontSize: 14,
-  width: 300,
+  width: 330,
   border: 2,
 };
 
