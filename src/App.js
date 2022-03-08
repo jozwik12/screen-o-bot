@@ -64,6 +64,7 @@ const App = () => {
           <HelpOutlineIcon color="primary" fontSize="large" />
         </IconButton>
         <ProjectInfo />
+        <Disclaimer />
       </Grid>
       <Grid
         item
@@ -94,9 +95,6 @@ const App = () => {
       </Grid>
       <Grid item>
         <MonitorWarning monitorAmount={monitorAmount}></MonitorWarning>
-      </Grid>
-      <Grid item>
-        <Disclaimer />
       </Grid>
     </Grid>
   );

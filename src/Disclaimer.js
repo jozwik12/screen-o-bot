@@ -2,6 +2,8 @@ import { Fragment, useState } from "react";
 import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import ReportGmailerrorredRoundedIcon from '@mui/icons-material/ReportGmailerrorredRounded';
 
 const Disclaimer = () => {
   const [showDisclaimer, setShowDisclaimer] = useState({
@@ -31,7 +33,12 @@ const Disclaimer = () => {
     <div>
       {["bottom"].map((anchor) => (
         <Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>Zastrzeżenie</Button>
+          <IconButton onClick={toggleDrawer(anchor, true)}>
+            <ReportGmailerrorredRoundedIcon
+              color="primary"
+              sx={{ fontSize: 35 }}
+            />
+          </IconButton>
           <SwipeableDrawer
             anchor={anchor}
             open={showDisclaimer[anchor]}
