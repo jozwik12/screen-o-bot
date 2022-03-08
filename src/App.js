@@ -38,41 +38,57 @@ const App = () => {
   }, []);
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={10}>
+    <Grid
+      container
+      sx={{
+        display: "flex",
+        alignContent: "center",
+        justifyContent: "flex-start",
+        width: 500,
+        p: "2px",
+        gap: "8px",
+      }}
+    >
+      <Grid
+        item
+        xs={12}
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          p: "0px",
+        }}
+      >
         <RecorderButton />
-      </Grid>
-      <Grid item xs={1}>
         <IconButton>
           <HelpOutlineIcon color="primary" fontSize="large" />
         </IconButton>
-      </Grid>
-      <Grid item xs={1}>
         <ProjectInfo />
       </Grid>
-      <Grid item xs={11}>
+      <Grid
+        item
+        sx={{ display: "flex", flexDirection: "row", alignContent: "flex-end" }}
+      >
         <TextField
           id="filled-hidden-label-small"
           size="small"
           value={savePath}
           disabled
-          fullWidth
           helperText="Folder zapisu"
+          sx={{ width: 400 }}
         ></TextField>
-      </Grid>
-      <Grid item xs={1}>
         <IconButton
           variant="contained"
           component="label"
           onClick={getSavePathFromMainProcess}
+          sx={{ display: "flex", alignContent: "flex-end" }}
         >
-          <FolderRoundedIcon color="primary" fontSize="large" />
+          <FolderRoundedIcon color="primary" fontSize="large" sx={{ p: 1 }} />
         </IconButton>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item>
         <MonitorWarning monitorAmount={monitorAmount}></MonitorWarning>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item>
         <Disclaimer />
       </Grid>
     </Grid>
