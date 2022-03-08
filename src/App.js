@@ -12,6 +12,7 @@ import "@fontsource/roboto/700.css";
 import { useEffect, useState } from "react";
 import ProjectInfo from "./ProjectInfo";
 import { Grid } from "@mui/material";
+import InputAdornment from "@mui/material/InputAdornment";
 
 const App = () => {
   let [savePath, setSavePath] = useState("");
@@ -75,15 +76,21 @@ const App = () => {
           disabled
           helperText="Folder zapisu"
           sx={{ width: 400 }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end" sx={{ p: 0 }}>
+                <IconButton
+                  variant="contained"
+                  component="label"
+                  onClick={getSavePathFromMainProcess}
+                  sx={{ display: "flex", alignContent: "flex-end" }}
+                >
+                  <FolderRoundedIcon color="primary" fontSize="large" />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         ></TextField>
-        <IconButton
-          variant="contained"
-          component="label"
-          onClick={getSavePathFromMainProcess}
-          sx={{ display: "flex", alignContent: "flex-end" }}
-        >
-          <FolderRoundedIcon color="primary" fontSize="large" sx={{ p: 1 }} />
-        </IconButton>
       </Grid>
       <Grid item>
         <MonitorWarning monitorAmount={monitorAmount}></MonitorWarning>
