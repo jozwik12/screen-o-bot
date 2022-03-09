@@ -107,8 +107,9 @@ const createRecorderWindow = () => {
 const createMainWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 510,
+    height: 260,
+    resizable: isDev,
     title: "Loading...",
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),

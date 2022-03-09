@@ -76,7 +76,7 @@ const App = () => {
           value={savePath}
           disabled
           helperText="Folder zapisu"
-          sx={{ width: 460 }}
+          sx={{ width: 480 }}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end" sx={{ p: 0 }}>

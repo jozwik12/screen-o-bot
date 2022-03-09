@@ -45,6 +45,7 @@ const ProjectInfo = () => {
             open={showProjectInfo[anchor]}
             onClose={toggleDrawer(anchor, false)}
             onOpen={toggleDrawer(anchor, true)}
+            swipeAreaWidth={0}
           >
             {list(anchor)}
           </SwipeableDrawer>
