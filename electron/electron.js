@@ -98,9 +98,11 @@ const createRecorderWindow = () => {
   });
 
   ipcMain.on("hide", () => {
-    child.kill();
-    log.info("done");
-    child = null;
+    setTimeout(() => {
+      child.kill();
+      log.info("done");
+      child = null;
+    }, 330);
   });
 };
 
@@ -118,7 +120,7 @@ const createMainWindow = () => {
       contextIsolation: false,
     },
   });
-  mainWindow.webContents.on('new-window', function(e, url) {
+  mainWindow.webContents.on("new-window", function (e, url) {
     e.preventDefault();
     shell.openExternal(url);
   });
