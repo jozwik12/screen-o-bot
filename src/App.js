@@ -4,7 +4,6 @@ import IconButton from "@mui/material/IconButton";
 import RecorderButton from "./RecorderButton";
 import MonitorWarning from "./MonitorWarning";
 import Disclaimer from "./Disclaimer";
-import TextField from "@mui/material/TextField";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -13,6 +12,14 @@ import { useEffect, useState } from "react";
 import ProjectInfo from "./ProjectInfo";
 import { Grid } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
+import { styled } from '@mui/material/styles';
+import MuiTextField from '@mui/material/TextField';
+
+const TextField = styled(MuiTextField)(() => ({
+  '& .MuiOutlinedInput-root': {
+    paddingRight: 0,
+  },
+}));
 
 const App = () => {
   let [savePath, setSavePath] = useState("");
