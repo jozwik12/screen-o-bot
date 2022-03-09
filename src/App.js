@@ -20,6 +20,7 @@ const TextField = styled(MuiTextField)(() => ({
 const App = () => {
   const [savePath, setSavePath] = useState("");
   const [monitorAmount, setMonitorAmount] = useState(0);
+  const [appVersion, setAppVersion] = useState("");
 
   const getDefaultSavePath = async () => {
     setSavePath(await window.ipcRenderer.invoke("get-default-save-path"));
@@ -36,9 +37,14 @@ const App = () => {
     setMonitorAmount(await window.ipcRenderer.invoke("monitor-amount"));
   };
 
+  const getAppVersion = async () => {
+    setAppVersion(await window.ipcRenderer.invoke("app-version"));
+  };
+
   useEffect(() => {
     getDefaultSavePath();
     getMonitorAmount();
+    getAppVersion();
   }, []);
 
   return (
@@ -64,7 +70,7 @@ const App = () => {
         <IconButton>
           <HelpOutlineIcon color="primary" fontSize="large" />
         </IconButton>
-        <ProjectInfo />
+        <ProjectInfo appVersion={appVersion} />
         <Disclaimer />
       </Grid>
       <Grid item>

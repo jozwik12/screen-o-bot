@@ -5,7 +5,7 @@ import Link from "@mui/material/Link";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import IconButton from "@mui/material/IconButton";
 
-const ProjectInfo = () => {
+const ProjectInfo = (props) => {
   const [showProjectInfo, setShowProjectInfo] = useState({
     bottom: false,
   });
@@ -29,6 +29,7 @@ const ProjectInfo = () => {
       >
         GitHub
       </Link>
+      Wersja programu: {props.appVersion}
     </Box>
   );
 

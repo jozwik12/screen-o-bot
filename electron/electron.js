@@ -39,6 +39,10 @@ const getMonitorAmount = () => {
   return screen.getAllDisplays().length;
 };
 
+const getAppVersion = () => {
+  return app.getVersion();
+};
+
 const createRecorderWindow = () => {
   const recorderWindow = new BrowserWindow({
     width: 400,
@@ -149,6 +153,7 @@ app.whenReady().then(() => {
   ipcMain.handle("select-save-dir", selectSaveDir);
   ipcMain.handle("get-default-save-path", getDefaultSaveDirectory);
   ipcMain.handle("monitor-amount", getMonitorAmount);
+  ipcMain.handle("app-version", getAppVersion);
   createMainWindow();
   createRecorderWindow();
 
