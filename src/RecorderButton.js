@@ -11,6 +11,11 @@ const buttonStyle = {
   fontSize: 14,
   width: 330,
   border: 2,
+  lineHeight: 0,
+};
+
+const iconStyle = {
+  fontSize: 24,
 };
 
 const RecorderButton = () => {
@@ -21,7 +26,7 @@ const RecorderButton = () => {
         <Button
           sx={buttonStyle}
           variant="contained"
-          endIcon={<LaunchIcon />}
+          endIcon={<LaunchIcon style={iconStyle} />}
           onClick={() => {
             window.ipcRenderer.send("show");
             setRecorderButtonIndex(1);
@@ -35,7 +40,7 @@ const RecorderButton = () => {
         <Button
           sx={buttonStyle}
           variant="contained"
-          endIcon={<CircleIcon />}
+          endIcon={<CircleIcon style={iconStyle} />}
           onClick={() => {
             window.ipcRenderer.send("runPythonScript");
             setRecorderButtonIndex(2);
@@ -49,7 +54,7 @@ const RecorderButton = () => {
         <Button
           sx={buttonStyle}
           variant="contained"
-          endIcon={<StopCircleIcon />}
+          endIcon={<StopCircleIcon style={iconStyle} />}
           onClick={() => {
             window.ipcRenderer.send("hide");
             setRecorderButtonIndex(0);
