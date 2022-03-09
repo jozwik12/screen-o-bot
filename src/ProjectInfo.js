@@ -19,9 +19,8 @@ const ProjectInfo = () => {
   };
 
   const list = () => (
-    <Box sx={{ width: "auto" }} role="presentation">
-      Autor: Szymon Józwicki
-      Strona Projektu: 
+    <Box sx={{ width: "auto", fontFamily: "Roboto" }} role="presentation">
+      Autor: Szymon Józwicki Strona Projektu:
       <Link
         href="https://github.com/jozwik12/screen-o-bot"
         target="_blank"

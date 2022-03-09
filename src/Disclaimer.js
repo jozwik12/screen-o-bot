@@ -19,7 +19,7 @@ const Disclaimer = () => {
   };
 
   const list = (anchor) => (
-    <Box sx={{ width: "auto" }} role="presentation">
+    <Box sx={{ width: "auto", fontFamily: "Roboto" }} role="presentation">
       Always make sure that you are allowed to take the screenshot of your
       screen content. Creator of this program is not responsible in any way for
       its use or misuse.
