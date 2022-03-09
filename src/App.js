@@ -8,18 +8,18 @@ import { useEffect, useState } from "react";
 import ProjectInfo from "./ProjectInfo";
 import { Grid } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
-import { styled } from '@mui/material/styles';
-import MuiTextField from '@mui/material/TextField';
+import { styled } from "@mui/material/styles";
+import MuiTextField from "@mui/material/TextField";
 
 const TextField = styled(MuiTextField)(() => ({
-  '& .MuiOutlinedInput-root': {
+  "& .MuiOutlinedInput-root": {
     paddingRight: 0,
   },
 }));
 
 const App = () => {
-  let [savePath, setSavePath] = useState("");
-  let [monitorAmount, setMonitorAmount] = useState(0);
+  const [savePath, setSavePath] = useState("");
+  const [monitorAmount, setMonitorAmount] = useState(0);
 
   const getDefaultSavePath = async () => {
     setSavePath(await window.ipcRenderer.invoke("get-default-save-path"));
@@ -47,7 +47,6 @@ const App = () => {
       sx={{
         display: "flex",
         alignContent: "center",
-        justifyContent: "flex-start",
         width: 496,
         p: "2px",
         gap: "8px",
@@ -58,7 +57,6 @@ const App = () => {
         xs={12}
         sx={{
           display: "flex",
-          flexDirection: "row",
           p: "0px",
         }}
       >
@@ -69,10 +67,7 @@ const App = () => {
         <ProjectInfo />
         <Disclaimer />
       </Grid>
-      <Grid
-        item
-        sx={{ display: "flex", flexDirection: "row", alignContent: "flex-end" }}
-      >
+      <Grid item>
         <TextField
           id="filled-hidden-label-small"
           size="small"
@@ -82,12 +77,11 @@ const App = () => {
           sx={{ width: 480 }}
           InputProps={{
             endAdornment: (
-              <InputAdornment position="end" sx={{ p: 0 }}>
+              <InputAdornment position="end" >
                 <IconButton
                   variant="contained"
                   component="label"
                   onClick={getSavePathFromMainProcess}
-                  sx={{ display: "flex", alignContent: "flex-end" }}
                 >
                   <FolderRoundedIcon color="primary" fontSize="large" />
                 </IconButton>
