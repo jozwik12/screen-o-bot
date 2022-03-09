@@ -10,6 +10,7 @@ import { Grid } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import { styled } from "@mui/material/styles";
 import MuiTextField from "@mui/material/TextField";
+import { useTour } from '@reactour/tour'
 
 const TextField = styled(MuiTextField)(() => ({
   "& .MuiOutlinedInput-root": {
@@ -21,6 +22,7 @@ const App = () => {
   const [savePath, setSavePath] = useState("");
   const [monitorAmount, setMonitorAmount] = useState(0);
   const [appVersion, setAppVersion] = useState("");
+  const { setIsOpen } = useTour();
 
   const getDefaultSavePath = async () => {
     setSavePath(await window.ipcRenderer.invoke("get-default-save-path"));
@@ -67,7 +69,7 @@ const App = () => {
         }}
       >
         <RecorderButton />
-        <IconButton>
+        <IconButton onClick={() => setIsOpen(true)}>
           <HelpOutlineIcon color="primary" fontSize="large" />
         </IconButton>
         <ProjectInfo appVersion={appVersion} />
@@ -75,6 +77,7 @@ const App = () => {
       </Grid>
       <Grid item>
         <TextField
+          className="first-step"
           id="filled-hidden-label-small"
           size="small"
           value={savePath}
@@ -83,7 +86,7 @@ const App = () => {
           sx={{ width: 480 }}
           InputProps={{
             endAdornment: (
-              <InputAdornment position="end" >
+              <InputAdornment position="end">
                 <IconButton
                   variant="contained"
                   component="label"
