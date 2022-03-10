@@ -61,6 +61,7 @@
       "owner": "jozwik12"
     },
     "win": {
+      "icon": "./build/icon.ico",
       "target": [
         "portable"
       ]
