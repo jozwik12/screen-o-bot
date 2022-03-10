@@ -51,21 +51,11 @@ def take_screenshot():
     """
     Takes screenshot of the specified screen region
     """
-    # TODO: check best time_between_screenshots time
-    # TODO: implement something to specify screen region instead of hardcoding it
     increment_counter()
     myscreenshot = gui.screenshot(region=(
         screenshot_coordinates["xpos"], screenshot_coordinates["ypos"], screenshot_coordinates["width"], screenshot_coordinates["height"]))
     myscreenshot.save(save_path + folder_name + fr"\screenshot_{counter}.png")
     time.sleep(time_between_screenshots)
-
-
-def play_notification_sound():
-    # TODO: odd option to turn the sound on/off
-    # TODO: check if asynchronous playing is necessary
-    # TODO: add volume control
-    # winsound.MessageBeep(type=winsound.MB_ICONHAND)
-    pass
 
 
 def increment_counter():
