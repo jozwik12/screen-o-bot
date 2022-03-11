@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { TourProvider } from "@reactour/tour";
-import steps from "./TourSteps"
+import steps from "./tourSteps"
 
 ReactDOM.render(
   <TourProvider steps={steps}>
