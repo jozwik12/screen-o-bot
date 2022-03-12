@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import ReportGmailerrorredRoundedIcon from '@mui/icons-material/ReportGmailerrorredRounded';
+import ReportGmailerrorredRoundedIcon from "@mui/icons-material/ReportGmailerrorredRounded";
 
 const Disclaimer = () => {
   const [showDisclaimer, setShowDisclaimer] = useState({
@@ -35,6 +35,7 @@ const Disclaimer = () => {
         <Fragment key={anchor}>
           <IconButton onClick={toggleDrawer(anchor, true)}>
             <ReportGmailerrorredRoundedIcon
+              className="Disclaimer"
               color="primary"
               sx={{ fontSize: 35 }}
             />

@@ -38,7 +38,11 @@ const ProjectInfo = (props) => {
       {["bottom"].map((anchor) => (
         <Fragment key={anchor}>
           <IconButton onClick={toggleDrawer(anchor, true)}>
-            <InfoOutlinedIcon color="primary" fontSize="large" />
+            <InfoOutlinedIcon
+              className="ProjectInfo"
+              color="primary"
+              fontSize="large"
+            />
           </IconButton>
           <SwipeableDrawer
             anchor={anchor}

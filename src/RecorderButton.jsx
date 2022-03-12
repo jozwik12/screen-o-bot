@@ -24,6 +24,7 @@ const RecorderButton = () => {
     case 0:
       return (
         <Button
+          className="RecorderButton"
           sx={buttonStyle}
           variant="contained"
           endIcon={<LaunchIcon style={iconStyle} />}
@@ -38,6 +39,7 @@ const RecorderButton = () => {
     case 1:
       return (
         <Button
+          className="RecorderButton"
           sx={buttonStyle}
           variant="contained"
           endIcon={<CircleIcon style={iconStyle} />}
@@ -52,6 +54,7 @@ const RecorderButton = () => {
     case 2:
       return (
         <Button
+          className="RecorderButton"
           sx={buttonStyle}
           variant="contained"
           endIcon={<StopCircleIcon style={iconStyle} />}

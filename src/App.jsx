@@ -10,7 +10,7 @@ import { Grid } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import { styled } from "@mui/material/styles";
 import MuiTextField from "@mui/material/TextField";
-import { useTour } from '@reactour/tour'
+import { useTour } from "@reactour/tour";
 
 const TextField = styled(MuiTextField)(() => ({
   "& .MuiOutlinedInput-root": {
@@ -70,14 +70,14 @@ const App = () => {
       >
         <RecorderButton />
         <IconButton onClick={() => setIsOpen(true)}>
-          <HelpOutlineIcon color="primary" fontSize="large" />
+          <HelpOutlineIcon className="Help" color="primary" fontSize="large" />
         </IconButton>
         <ProjectInfo appVersion={appVersion} />
         <Disclaimer />
       </Grid>
       <Grid item>
         <TextField
-          className="first-step"
+          className="SavePath"
           id="filled-hidden-label-small"
           size="small"
           value={savePath}
@@ -88,6 +88,7 @@ const App = () => {
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton
+                  className="ChooseSavePath"
                   variant="contained"
                   component="label"
                   onClick={getSavePathFromMainProcess}
