@@ -61,7 +61,7 @@ def take_screenshot():
 def increment_counter():
     """
     Increases counter by 1 to not overwrite previous screenshots
-    Counter is always 3-digit number in format XXX
+    Counter is always 4-digit number in format XXXX
     Small numbers have leading zeros
     """
     global counter
