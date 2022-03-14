@@ -80,11 +80,13 @@ def screen_has_changed():
         try:
             loc = gui.locateOnScreen(save_path + folder_name + fr"\screenshot_{counter}.png",
                                      confidence=comparison_confidence)
-            return not bool(loc)
         except gui.ImageNotFoundException:
             return True
         except IOError:
             time.sleep(0.25)
+        else:
+            return not bool(loc)
+
 
 
 def main_loop():
@@ -98,7 +100,6 @@ def main_loop():
         time.sleep(0.2)
         if screen_has_changed():
             take_screenshot()
-            play_notification_sound()
 
 
 if __name__ == "__main__":
