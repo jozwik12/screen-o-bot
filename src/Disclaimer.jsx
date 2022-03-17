@@ -19,11 +19,27 @@ const Disclaimer = () => {
   };
 
   const list = (anchor) => (
-    <Box sx={{ width: "auto", fontFamily: "Roboto" }} role="presentation">
-      Always make sure that you are allowed to take the screenshot of your
-      screen content. Creator of this program is not responsible in any way for
-      its use or misuse.
-      <Button variant="contained" onClick={toggleDrawer(anchor, false)}>
+    <Box
+      sx={{
+        width: "auto",
+        fontFamily: "Roboto",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+      role="presentation"
+    >
+      <span style={{ textAlign: "justify", padding: "5px" }}>
+        Zawsze upewnij się, że wolno ci przechwytywać zawartość wyświetlaną na
+        ekranie. Twórca programu nie jest odpowiedzialny za jakiekolwiek
+        nadużycia wynikające z działania lub użycia programu oraz wynikające z
+        nich konsekwencje.
+      </span>
+      <Button
+        variant="contained"
+        onClick={toggleDrawer(anchor, false)}
+        sx={{ width: 300 }}
+      >
         OK
       </Button>
     </Box>
