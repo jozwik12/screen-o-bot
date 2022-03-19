@@ -1,28 +1,33 @@
 const steps = [
   {
+    selector: "html",
+    content:
+      "Witaj użytkowniku! Naciśnij strzałkę w prawo, aby dowiedzieć się więcej",
+  },
+  {
     selector: ".RecorderButton",
-    content: "This is my 1st Step",
+    content: "Tym przyciskiem uruchomisz nagrywanie",
   },
   {
     selector: ".Help",
-    content: "This is my 2nd Step",
+    content: "Tutaj dowiesz się jak używać programu",
   },
   {
     selector: ".ProjectInfo",
-    content: "This is my 3rd Step",
+    content: "Kliknij tutaj, aby dowiedzieć się więcej o projekcie",
   },
   {
     selector: ".Disclaimer",
-    content: "This is my 4th Step",
+    content: "Aby wyświetlić ponownie zastrzeżenie autora, kliknij tutaj",
   },
   {
     selector: ".SavePath",
-    content: "This is my 5th Step",
-    position: "bottom",
+    content:
+      "Pod tą ścieżką zostanie stworzony folder, w którym zostaną zapisane screenshoty",
   },
   {
     selector: ".ChooseSavePath",
-    content: "This is my 6th Step",
+    content: "Tym przyciskiem możesz zmienić ścieżkę zapisu",
   },
 ];
 
