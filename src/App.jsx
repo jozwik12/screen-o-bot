@@ -57,14 +57,14 @@ const App = () => {
         alignContent: "center",
         width: 496,
         p: "2px",
-        gap: "8px",
+        gap: "32px",
       }}
     >
       <Grid
         item
-        xs={12}
         sx={{
           display: "flex",
+          alignItems: "center",
           p: "0px",
         }}
       >

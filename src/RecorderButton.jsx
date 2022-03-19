@@ -11,7 +11,7 @@ const buttonStyle = {
   fontSize: 14,
   width: 330,
   border: 2,
-  lineHeight: 0,
+  lineHeight: 3,
 };
 
 const iconStyle = {
