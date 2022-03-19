@@ -2,10 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { TourProvider } from "@reactour/tour";
-import steps from "./tourSteps"
+import steps from "./tourSteps";
 
 ReactDOM.render(
-  <TourProvider steps={steps}>
+  <TourProvider
+    steps={steps}
+    padding={{ mask: 5 }}
+    styles={{
+      popover: (base) => ({
+        ...base,
+        borderRadius: 10,
+      }),
+      maskArea: (base) => ({ ...base, rx: 10 }),
+      close: (base) => ({ ...base, right: 8, top: 8 }),
+    }}
+  >
     <App />
   </TourProvider>,
   document.getElementById("root")
