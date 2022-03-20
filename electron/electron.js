@@ -114,7 +114,7 @@ const createMainWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 510,
-    height: 300,
+    height: 285,
     resizable: isDev,
     title: "Loading...",
     webPreferences: {

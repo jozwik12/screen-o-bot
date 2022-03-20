@@ -8,10 +8,14 @@ ReactDOM.render(
   <TourProvider
     steps={steps}
     padding={{ mask: 5 }}
+    showBadge={false}
     styles={{
       popover: (base) => ({
         ...base,
         borderRadius: 10,
+        padding: 8,
+        paddingLeft: 20,
+        paddingRight: 20,
       }),
       maskArea: (base) => ({ ...base, rx: 10 }),
       close: (base) => ({ ...base, right: 8, top: 8 }),

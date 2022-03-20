@@ -57,7 +57,7 @@ const App = () => {
         alignContent: "center",
         width: 496,
         p: "2px",
-        gap: "32px",
+        gap: "12px",
       }}
     >
       <Grid

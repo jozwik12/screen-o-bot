@@ -1,6 +1,6 @@
 const steps = [
   {
-    selector: "html",
+    selector: "body",
     content:
       "Witaj użytkowniku! Naciśnij strzałkę w prawo, aby dowiedzieć się więcej",
   },
