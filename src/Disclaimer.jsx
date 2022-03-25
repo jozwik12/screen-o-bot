@@ -26,19 +26,23 @@ const Disclaimer = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        p: "8px",
       }}
       role="presentation"
     >
-      <span style={{ textAlign: "justify", padding: "5px" }}>
+      <span style={{ textAlign: "justify"}}>
         Zawsze upewnij się, że wolno ci przechwytywać zawartość wyświetlaną na
-        ekranie. Twórca programu nie jest odpowiedzialny za jakiekolwiek
-        nadużycia wynikające z działania lub użycia programu oraz wynikające z
-        nich konsekwencje.
+        ekranie.
+      </span>
+      <span style={{ textAlign: "justify", paddingBottom: "8px" }}>
+        Twórca programu nie jest odpowiedzialny za jakiekolwiek nadużycia
+        wynikające z działania lub użycia programu oraz wynikające z nich
+        konsekwencje.
       </span>
       <Button
         variant="contained"
         onClick={toggleDrawer(anchor, false)}
-        sx={{ width: 300 }}
+        sx={{ width: 120 }}
       >
         OK
       </Button>
