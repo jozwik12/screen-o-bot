@@ -18,9 +18,6 @@ time_between_screenshots = 0
 # Parameter that dictates, how similar previous screenshot must be in relation to current screen state
 comparison_confidence = 0.95
 
-# Parameter that dictates, how comparison confidence of excluded files to current screen state
-excluded_comparison_confidence = 0.95
-
 # Default folder name, set after invoking create_dated_folder() method
 folder_name = ""
 
