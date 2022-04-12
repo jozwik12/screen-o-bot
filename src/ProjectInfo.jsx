@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Link from "@mui/material/Link";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -19,18 +19,48 @@ const ProjectInfo = (props) => {
   };
 
   const list = () => (
-    <Box sx={{ width: "auto", fontFamily: "Roboto" }} role="presentation">
-      Autor: Szymon Józwicki Strona Projektu:
-      <Link
-        href="https://github.com/jozwik12/screen-o-bot"
-        target="_blank"
-        rel="noopener"
-        underline="hover"
-      >
-        GitHub
-      </Link>
-      Wersja programu: {props.appVersion}
-    </Box>
+    <Grid
+      container
+      spacing={1.5}
+      sx={{
+        fontFamily: "Roboto",
+        display: "flex",
+        alignContent: "center",
+        p: "8px",
+      }}
+    >
+      <Grid item xs={12}>
+        Program do przechwytywania zawartości pulpitu poprzez tworzenie
+        screenshotów w momencie , w którym wykryta zostanie zmiana zawartości
+        ekranu.
+      </Grid>
+      <Grid item xs={6}>
+        Autor: Szymon Józwicki
+      </Grid>
+      <Grid item xs={6}>
+        Wersja programu: {props.appVersion}
+      </Grid>
+      <Grid item xs={6}>
+        Strona Projektu: {" "}
+        <Link
+          href="https://github.com/jozwik12/screen-o-bot"
+          target="_blank"
+          rel="noopener"
+          underline="hover"
+        >
+          GitHub
+        </Link>
+      </Grid>
+      <Grid item xs={6}>
+        Wersja Electron: 16.0.0
+      </Grid>
+      <Grid item xs={12}>
+        Program rozpowszechniany pod licencją GNU GLP v3.0
+      </Grid>
+      <Grid item xs={12}>
+        Copyright © 2022 Szymon Józwicki
+      </Grid>
+    </Grid>
   );
 
   return (

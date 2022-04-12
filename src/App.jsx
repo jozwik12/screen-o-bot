@@ -78,12 +78,16 @@ const App = () => {
       <Grid item>
         <TextField
           className="SavePath"
-          id="filled-hidden-label-small"
           size="small"
           value={savePath}
           disabled
           helperText="Folder zapisu"
-          sx={{ width: 480 }}
+          sx={{
+            width: 480,
+            input: {
+              "-webkit-text-fill-color": `rgba(0,0,0,0.85) !important`,
+            },
+          }}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
