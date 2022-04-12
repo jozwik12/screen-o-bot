@@ -3,6 +3,7 @@ import LaunchIcon from "@mui/icons-material/Launch";
 import CircleIcon from "@mui/icons-material/Circle";
 import StopCircleIcon from "@mui/icons-material/StopCircle";
 import { useState } from "react";
+import { useTour } from "@reactour/tour";
 
 const buttonStyle = {
   display: "flex",
@@ -18,8 +19,10 @@ const iconStyle = {
   fontSize: 24,
 };
 
-const RecorderButton = () => {
+const RecorderButton = (props) => {
   const [recorderButtonIndex, setRecorderButtonIndex] = useState(0);
+  const { currentStep, setCurrentStep } = useTour();
+
   switch (recorderButtonIndex) {
     case 0:
       return (
@@ -31,6 +34,7 @@ const RecorderButton = () => {
           onClick={() => {
             window.ipcRenderer.send("show");
             setRecorderButtonIndex(1);
+            setCurrentStep(2);
           }}
         >
           Otwórz okno przechwytywania
@@ -46,6 +50,7 @@ const RecorderButton = () => {
           onClick={() => {
             window.ipcRenderer.send("runPythonScript");
             setRecorderButtonIndex(2);
+            setCurrentStep(3);
           }}
         >
           Rozpocznij przechwytywanie
@@ -61,6 +66,7 @@ const RecorderButton = () => {
           onClick={() => {
             window.ipcRenderer.send("hide");
             setRecorderButtonIndex(0);
+            setCurrentStep(4);
           }}
         >
           Zatrzymaj przechwytywanie
