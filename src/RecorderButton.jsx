@@ -33,7 +33,7 @@ const RecorderButton = () => {
             setRecorderButtonIndex(1);
           }}
         >
-          Otwórz okno nagrywania
+          Otwórz okno przechwytywania
         </Button>
       );
     case 1:
@@ -48,7 +48,7 @@ const RecorderButton = () => {
             setRecorderButtonIndex(2);
           }}
         >
-          Rozpocznij nagrywanie
+          Rozpocznij przechwytywanie
         </Button>
       );
     case 2:
@@ -63,7 +63,7 @@ const RecorderButton = () => {
             setRecorderButtonIndex(0);
           }}
         >
-          Zatrzymaj nagrywanie
+          Zatrzymaj przechwytywanie
         </Button>
       );
   }
