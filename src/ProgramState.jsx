@@ -7,8 +7,10 @@ const ProgramState = (props) => {
     return (
       <Alert severity="warning" sx={componentStyle}>
         <AlertTitle>Wykryto więcej niż jeden monitor</AlertTitle>
-        Wykonywanie screenshotów jest możliwe wyłącznie na{" "}
-        <strong>monitorze głównym</strong>
+        Wykonywanie screenshotów jest możliwe wyłącznie
+        <div>
+          na <strong>monitorze głównym</strong>
+        </div>
       </Alert>
     );
   else
