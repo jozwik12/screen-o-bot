@@ -2,7 +2,7 @@ import FolderRoundedIcon from "@mui/icons-material/FolderRounded";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import IconButton from "@mui/material/IconButton";
 import RecorderButton from "./RecorderButton";
-import MonitorWarning from "./MonitorWarning";
+import ProgramState from "./ProgramState";
 import Disclaimer from "./Disclaimer";
 import { useEffect, useState } from "react";
 import ProjectInfo from "./ProjectInfo";
@@ -105,7 +105,7 @@ const App = () => {
         ></TextField>
       </Grid>
       <Grid item>
-        <MonitorWarning monitorAmount={monitorAmount}></MonitorWarning>
+        <ProgramState monitorAmount={monitorAmount}></ProgramState>
       </Grid>
     </Grid>
   );
