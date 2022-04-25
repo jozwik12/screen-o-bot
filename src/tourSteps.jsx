@@ -5,6 +5,11 @@ const steps = [
       "Witaj użytkowniku! Naciśnij strzałkę w prawo, aby dowiedzieć się więcej",
   },
   {
+    selector: "body",
+    content:
+      "Ten program umożliwia wykonywanie screenshotów wybranego przez ciebie obszaru ekranu. Screenshoty zostaną wykonane w momencie, w którym zawartość ekranu się zmieni",
+  },
+  {
     selector: ".RecorderButton",
     content:
       "Tym przyciskiem otworzysz okno za pomocą którego wybierzesz jaki obszar ekranu będzie przechwytywany. Spróbuj teraz!",
