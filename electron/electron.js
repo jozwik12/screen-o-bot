@@ -43,6 +43,10 @@ const getAppVersion = () => {
   return app.getVersion();
 };
 
+const getElectronVersion = () => {
+  return process.versions.electron;
+};
+
 const createRecorderWindow = () => {
   const recorderWindow = new BrowserWindow({
     width: 400,
@@ -154,6 +158,7 @@ app.whenReady().then(() => {
   ipcMain.handle("get-default-save-path", getDefaultSaveDirectory);
   ipcMain.handle("monitor-amount", getMonitorAmount);
   ipcMain.handle("app-version", getAppVersion);
+  ipcMain.handle("electron-version", getElectronVersion);
   createMainWindow();
   createRecorderWindow();
 

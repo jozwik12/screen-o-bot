@@ -41,7 +41,7 @@ const ProjectInfo = (props) => {
         Wersja programu: {props.appVersion}
       </Grid>
       <Grid item xs={6}>
-        Strona Projektu: {" "}
+        Strona projektu: {" "}
         <Link
           href="https://github.com/jozwik12/screen-o-bot"
           target="_blank"
@@ -52,7 +52,7 @@ const ProjectInfo = (props) => {
         </Link>
       </Grid>
       <Grid item xs={6}>
-        Wersja Electron: 16.0.0
+        Wersja Electron: {props.electronVersion}
       </Grid>
       <Grid item xs={12}>
         Program rozpowszechniany pod licencją GNU GLP v3.0

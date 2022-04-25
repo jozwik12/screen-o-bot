@@ -25,6 +25,7 @@ const App = () => {
   const [savePath, setSavePath] = useState("");
   const [monitorAmount, setMonitorAmount] = useState(0);
   const [appVersion, setAppVersion] = useState("");
+  const [electronVersion, setElectronVersion] = useState("");
   const { setIsOpen } = useTour();
 
   const getDefaultSavePath = async () => {
@@ -46,10 +47,15 @@ const App = () => {
     setAppVersion(await window.ipcRenderer.invoke("app-version"));
   };
 
+  const getElectronVersion = async () => {
+    setElectronVersion(await window.ipcRenderer.invoke("electron-version"));
+  };
+
   useEffect(() => {
     getDefaultSavePath();
     getMonitorAmount();
     getAppVersion();
+    getElectronVersion();
   }, []);
 
   return (
@@ -80,7 +86,7 @@ const App = () => {
               fontSize="large"
             />
           </IconButton>
-          <ProjectInfo appVersion={appVersion} />
+          <ProjectInfo appVersion={appVersion} electronVersion={electronVersion} />
           <Disclaimer />
         </Grid>
         <Grid item>
