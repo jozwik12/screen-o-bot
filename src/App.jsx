@@ -2,15 +2,17 @@ import FolderRoundedIcon from "@mui/icons-material/FolderRounded";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import IconButton from "@mui/material/IconButton";
 import RecorderButton from "./RecorderButton";
-import ProgramState from "./ProgramState";
+import ShowProgramState from "./ShowProgramState";
 import Disclaimer from "./Disclaimer";
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import ProjectInfo from "./ProjectInfo";
 import { Grid } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import { styled } from "@mui/material/styles";
 import MuiTextField from "@mui/material/TextField";
 import { useTour } from "@reactour/tour";
+
+export const ProgramStateContext = createContext();
 
 const TextField = styled(MuiTextField)(() => ({
   "& .MuiOutlinedInput-root": {
@@ -19,6 +21,7 @@ const TextField = styled(MuiTextField)(() => ({
 }));
 
 const App = () => {
+  const [programState, setProgramState] = useState(0);
   const [savePath, setSavePath] = useState("");
   const [monitorAmount, setMonitorAmount] = useState(0);
   const [appVersion, setAppVersion] = useState("");
@@ -50,64 +53,70 @@ const App = () => {
   }, []);
 
   return (
-    <Grid
-      container
-      sx={{
-        display: "flex",
-        alignContent: "center",
-        width: 496,
-        p: "2px",
-        gap: "12px",
-      }}
-    >
+    <ProgramStateContext.Provider value={{programState, setProgramState}}>
       <Grid
-        item
+        container
         sx={{
           display: "flex",
-          alignItems: "center",
-          p: "0px",
+          alignContent: "center",
+          width: 496,
+          p: "2px",
+          gap: "12px",
         }}
       >
-        <RecorderButton />
-        <IconButton onClick={() => setIsOpen(true)}>
-          <HelpOutlineIcon className="Help" color="primary" fontSize="large" />
-        </IconButton>
-        <ProjectInfo appVersion={appVersion} />
-        <Disclaimer />
-      </Grid>
-      <Grid item>
-        <TextField
-          className="SavePath"
-          size="small"
-          value={savePath}
-          disabled
-          helperText="Folder zapisu"
+        <Grid
+          item
           sx={{
-            width: 480,
-            input: {
-              "-webkit-text-fill-color": `rgba(0,0,0,0.85) !important`,
-            },
+            display: "flex",
+            alignItems: "center",
+            p: "0px",
           }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  className="ChooseSavePath"
-                  variant="contained"
-                  component="label"
-                  onClick={getSavePathFromMainProcess}
-                >
-                  <FolderRoundedIcon color="primary" fontSize="large" />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        ></TextField>
+        >
+          <RecorderButton />
+          <IconButton onClick={() => setIsOpen(true)}>
+            <HelpOutlineIcon
+              className="Help"
+              color="primary"
+              fontSize="large"
+            />
+          </IconButton>
+          <ProjectInfo appVersion={appVersion} />
+          <Disclaimer />
+        </Grid>
+        <Grid item>
+          <TextField
+            className="SavePath"
+            size="small"
+            value={savePath}
+            disabled
+            helperText="Folder zapisu"
+            sx={{
+              width: 480,
+              input: {
+                "-webkit-text-fill-color": `rgba(0,0,0,0.85) !important`,
+              },
+            }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    className="ChooseSavePath"
+                    variant="contained"
+                    component="label"
+                    onClick={getSavePathFromMainProcess}
+                  >
+                    <FolderRoundedIcon color="primary" fontSize="large" />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          ></TextField>
+        </Grid>
+        <Grid item>
+          <ShowProgramState monitorAmount={monitorAmount}></ShowProgramState>
+        </Grid>
       </Grid>
-      <Grid item>
-        <ProgramState monitorAmount={monitorAmount}></ProgramState>
-      </Grid>
-    </Grid>
+    </ProgramStateContext.Provider>
   );
 };
 

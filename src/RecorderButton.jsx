@@ -2,8 +2,9 @@ import Button from "@mui/material/Button";
 import LaunchIcon from "@mui/icons-material/Launch";
 import CircleIcon from "@mui/icons-material/Circle";
 import StopCircleIcon from "@mui/icons-material/StopCircle";
-import { useState } from "react";
+import { useContext } from "react";
 import { useTour } from "@reactour/tour";
+import { ProgramStateContext } from "./App";
 
 const buttonStyle = {
   display: "flex",
@@ -20,10 +21,10 @@ const iconStyle = {
 };
 
 const RecorderButton = (props) => {
-  const [recorderButtonIndex, setRecorderButtonIndex] = useState(0);
-  const { currentStep, setCurrentStep } = useTour();
+  const {programState, setProgramState} = useContext(ProgramStateContext);
+  const { setCurrentStep } = useTour();
 
-  switch (recorderButtonIndex) {
+  switch (programState) {
     case 0:
       return (
         <Button
@@ -33,7 +34,7 @@ const RecorderButton = (props) => {
           endIcon={<LaunchIcon style={iconStyle} />}
           onClick={() => {
             window.ipcRenderer.send("show");
-            setRecorderButtonIndex(1);
+            setProgramState(1)
             setCurrentStep(2);
           }}
         >
@@ -49,7 +50,7 @@ const RecorderButton = (props) => {
           endIcon={<CircleIcon style={iconStyle} />}
           onClick={() => {
             window.ipcRenderer.send("runPythonScript");
-            setRecorderButtonIndex(2);
+            setProgramState(2)
             setCurrentStep(3);
           }}
         >
@@ -65,7 +66,7 @@ const RecorderButton = (props) => {
           endIcon={<StopCircleIcon style={iconStyle} />}
           onClick={() => {
             window.ipcRenderer.send("hide");
-            setRecorderButtonIndex(0);
+            setProgramState(0)
             setCurrentStep(4);
           }}
         >
