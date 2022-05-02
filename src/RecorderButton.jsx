@@ -21,7 +21,7 @@ const iconStyle = {
 };
 
 const RecorderButton = (props) => {
-  const { programState, setProgramState, setShowLoading } =
+  const { programState, setProgramState, showLoading, setShowLoading } =
     useContext(ProgramStateContext);
   const { setCurrentStep } = useTour();
 
@@ -32,6 +32,7 @@ const RecorderButton = (props) => {
           className="RecorderButton"
           sx={buttonStyle}
           variant="contained"
+          disabled={showLoading}
           endIcon={<LaunchIcon style={iconStyle} />}
           onClick={() => {
             window.ipcRenderer.send("show");
@@ -48,6 +49,7 @@ const RecorderButton = (props) => {
           className="RecorderButton"
           sx={buttonStyle}
           variant="contained"
+          disabled={showLoading}
           endIcon={<CircleIcon style={iconStyle} />}
           onClick={() => {
             window.ipcRenderer.send("runPythonScript");
@@ -65,6 +67,7 @@ const RecorderButton = (props) => {
           className="RecorderButton"
           sx={buttonStyle}
           variant="contained"
+          disabled={showLoading}
           endIcon={<StopCircleIcon style={iconStyle} />}
           onClick={() => {
             window.ipcRenderer.send("hide");
