@@ -21,7 +21,8 @@ const iconStyle = {
 };
 
 const RecorderButton = (props) => {
-  const {programState, setProgramState} = useContext(ProgramStateContext);
+  const { programState, setProgramState, setShowLoading } =
+    useContext(ProgramStateContext);
   const { setCurrentStep } = useTour();
 
   switch (programState) {
@@ -34,7 +35,7 @@ const RecorderButton = (props) => {
           endIcon={<LaunchIcon style={iconStyle} />}
           onClick={() => {
             window.ipcRenderer.send("show");
-            setProgramState(1)
+            setProgramState(1);
             setCurrentStep(2);
           }}
         >
@@ -50,8 +51,9 @@ const RecorderButton = (props) => {
           endIcon={<CircleIcon style={iconStyle} />}
           onClick={() => {
             window.ipcRenderer.send("runPythonScript");
-            setProgramState(2)
+            setProgramState(2);
             setCurrentStep(3);
+            setShowLoading(true);
           }}
         >
           Rozpocznij przechwytywanie
@@ -66,8 +68,9 @@ const RecorderButton = (props) => {
           endIcon={<StopCircleIcon style={iconStyle} />}
           onClick={() => {
             window.ipcRenderer.send("hide");
-            setProgramState(0)
+            setProgramState(0);
             setCurrentStep(4);
+            setShowLoading(true);
           }}
         >
           Zatrzymaj przechwytywanie

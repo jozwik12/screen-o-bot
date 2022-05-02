@@ -3,12 +3,22 @@ import AlertTitle from "@mui/material/AlertTitle";
 import RecordingIcon from "./RecordingIcon";
 import { useContext } from "react";
 import { ProgramStateContext } from "./App";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const ProgramState = (props) => {
-  const { programState } = useContext(ProgramStateContext);
-  const componentStyle = { pb: "16px", width: 448 };
+  const { programState, showLoading, setShowLoading } =
+    useContext(ProgramStateContext);
+  const componentStyle = { pb: "16px", width: 448, height: 64 };
 
-  if (programState === 2)
+  if (showLoading === true) {
+    setTimeout(() => setShowLoading(false), 1200);
+    return (
+      <Alert severity="info" sx={componentStyle}>
+        <AlertTitle>Ładowanie...</AlertTitle>
+        <LinearProgress sx={{ height: 5, borderRadius: 2.5, width: 400 }} />
+      </Alert>
+    );
+  } else if (programState === 2) {
     return (
       <Alert
         iconMapping={{ info: <RecordingIcon /> }}
@@ -19,7 +29,7 @@ const ProgramState = (props) => {
         Możesz bezpiecznie zminimalizować okno programu
       </Alert>
     );
-  else if (props.monitorAmount > 1)
+  } else if (props.monitorAmount > 1)
     return (
       <Alert severity="warning" sx={componentStyle}>
         <AlertTitle>Wykryto więcej niż jeden monitor</AlertTitle>

@@ -22,6 +22,7 @@ const TextField = styled(MuiTextField)(() => ({
 
 const App = () => {
   const [programState, setProgramState] = useState(0);
+  const [showLoading, setShowLoading] = useState(false);
   const [savePath, setSavePath] = useState("");
   const [monitorAmount, setMonitorAmount] = useState(0);
   const [appVersion, setAppVersion] = useState("");
@@ -59,7 +60,9 @@ const App = () => {
   }, []);
 
   return (
-    <ProgramStateContext.Provider value={{programState, setProgramState}}>
+    <ProgramStateContext.Provider
+      value={{ programState, setProgramState, showLoading, setShowLoading }}
+    >
       <Grid
         container
         sx={{
@@ -86,7 +89,10 @@ const App = () => {
               fontSize="large"
             />
           </IconButton>
-          <ProjectInfo appVersion={appVersion} electronVersion={electronVersion} />
+          <ProjectInfo
+            appVersion={appVersion}
+            electronVersion={electronVersion}
+          />
           <Disclaimer />
         </Grid>
         <Grid item>
