@@ -30,8 +30,8 @@ const ProjectInfo = (props) => {
       }}
     >
       <Grid item xs={12}>
-        Program do przechwytywania zawartości pulpitu poprzez tworzenie
-        screenshotów w momencie , w którym wykryta zostanie zmiana zawartości
+        Program do przechwytywania zawartości ekranu poprzez tworzenie
+        screenshotów w momencie, w którym wykryta zostanie zmiana zawartości
         ekranu.
       </Grid>
       <Grid item xs={6}>
