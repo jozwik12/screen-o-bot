@@ -104,6 +104,8 @@ const App = () => {
             helperText="Folder zapisu"
             sx={{
               width: 480,
+              pointerEvents: "none",
+              userSelect: "none",
               input: {
                 "-webkit-text-fill-color": `rgba(0,0,0,0.85) !important`,
               },
@@ -116,6 +118,7 @@ const App = () => {
                     variant="contained"
                     component="label"
                     onClick={getSavePathFromMainProcess}
+                    sx={{ pointerEvents: "all" }}
                   >
                     <FolderRoundedIcon color="primary" fontSize="large" />
                   </IconButton>

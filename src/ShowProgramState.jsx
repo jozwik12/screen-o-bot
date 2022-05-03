@@ -8,9 +8,9 @@ import LinearProgress from "@mui/material/LinearProgress";
 const ProgramState = (props) => {
   const { programState, showLoading, setShowLoading } =
     useContext(ProgramStateContext);
-  const componentStyle = { pb: "16px", width: 448, height: 70 };
+  const componentStyle = { pb: "16px", width: 448, height: 70, userSelect: "none" };
 
-  if (showLoading === true) {
+  if (showLoading) {
     setTimeout(() => setShowLoading(false), 1200);
     return (
       <Alert severity="info" sx={componentStyle} variant="outlined">
