@@ -8,7 +8,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 const ProgramState = (props) => {
   const { programState, showLoading, setShowLoading } =
     useContext(ProgramStateContext);
-  const componentStyle = { pb: "16px", width: 448, height: 64 };
+  const componentStyle = { pb: "16px", width: 448, height: 70 };
 
   if (showLoading === true) {
     setTimeout(() => setShowLoading(false), 1200);
