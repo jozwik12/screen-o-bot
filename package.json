@@ -41,7 +41,7 @@
     "pack": "build --dir",
     "postinstall": "install-app-deps",
     "build": "react-scripts build",
-    "build-python": "robocopy python/src/dist/main build/main /S",
+    "build-python": "robocopy python/dist/main build/main /S",
     "build-electron": "robocopy electron build/electron /S",
     "package": "electron-builder build --win -c.extraMetadata.main=build/electron/electron.js --publish never",
     "dist": "yarn build && yarn build-python & yarn build-electron & yarn package"

@@ -17,7 +17,7 @@ const log = require("electron-log");
 let child = null;
 let savePath = path.join(app.getPath("home"), "/Desktop/pyscreens/");
 const pythonScriptPath = isDev
-  ? "./python/src/dist/main/main.exe"
+  ? "./python/dist/main/main.exe"
   : "./resources/app.asar.unpacked/build/main/main.exe";
 const recorderBackgroundPath = isDev
   ? `file://${path.join(__dirname, "/../public/recorderBackground.html")}`
