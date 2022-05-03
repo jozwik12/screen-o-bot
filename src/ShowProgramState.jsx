@@ -13,7 +13,7 @@ const ProgramState = (props) => {
   if (showLoading === true) {
     setTimeout(() => setShowLoading(false), 1200);
     return (
-      <Alert severity="info" sx={componentStyle}>
+      <Alert severity="info" sx={componentStyle} variant="outlined">
         <AlertTitle>Ładowanie...</AlertTitle>
         <LinearProgress
           sx={{ height: 5, borderRadius: 2.5, width: 400, marginTop: "12px" }}
