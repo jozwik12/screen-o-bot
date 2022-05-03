@@ -15,7 +15,9 @@ const ProgramState = (props) => {
     return (
       <Alert severity="info" sx={componentStyle}>
         <AlertTitle>Ładowanie...</AlertTitle>
-        <LinearProgress sx={{ height: 5, borderRadius: 2.5, width: 400 }} />
+        <LinearProgress
+          sx={{ height: 5, borderRadius: 2.5, width: 400, marginTop: "12px" }}
+        />
       </Alert>
     );
   } else if (programState === 2) {
