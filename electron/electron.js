@@ -15,7 +15,7 @@ const log = require("electron-log");
 
 //References for shared variables
 let child = null;
-let savePath = path.join(app.getPath("home"), "/Desktop/pyscreens/");
+let savePath = path.join(app.getPath("home"), "/Desktop/screenshoty/");
 const pythonScriptPath = isDev
   ? "./python/dist/main/main.exe"
   : "./resources/app.asar.unpacked/build/main/main.exe";
