@@ -37,7 +37,7 @@ const RecorderButton = (props) => {
           onClick={() => {
             window.ipcRenderer.send("show");
             setProgramState(1);
-            setCurrentStep(2);
+            setCurrentStep(5);
           }}
         >
           Otwórz okno przechwytywania
@@ -54,7 +54,7 @@ const RecorderButton = (props) => {
           onClick={() => {
             window.ipcRenderer.send("runPythonScript");
             setProgramState(2);
-            setCurrentStep(3);
+            setCurrentStep(6);
             setShowLoading(true);
           }}
         >
@@ -72,7 +72,7 @@ const RecorderButton = (props) => {
           onClick={() => {
             window.ipcRenderer.send("hide");
             setProgramState(0);
-            setCurrentStep(4);
+            setCurrentStep(7);
             setShowLoading(true);
           }}
         >

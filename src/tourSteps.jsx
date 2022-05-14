@@ -10,6 +10,15 @@ const steps = [
       "Ten program umożliwia wykonywanie screenshotów wybranego przez ciebie obszaru ekranu. Screenshoty zostaną wykonane w momencie, w którym zawartość ekranu się zmieni",
   },
   {
+    selector: ".SavePath",
+    content:
+      "Pod tą ścieżką zostanie stworzony nowy folder, w którym zostaną umieszczone wykonane screenshoty",
+  },
+  {
+    selector: ".ChooseSavePath",
+    content: "Tym przyciskiem możesz zmienić ścieżkę zapisu",
+  },
+  {
     selector: ".RecorderButton",
     content:
       "Tym przyciskiem otworzysz okno za pomocą którego wybierzesz jaki obszar ekranu będzie przechwytywany. Spróbuj teraz!",
@@ -25,15 +34,6 @@ const steps = [
       "Nagrywanie trwa. Aby je przerwać naciśnij przycisk ponownie. Folder ze screenshotami otworzy się automatycznie",
   },
   {
-    selector: ".SavePath",
-    content:
-      "Pod tą ścieżką zostanie stworzony folder, w którym zostaną zapisane screenshoty",
-  },
-  {
-    selector: ".ChooseSavePath",
-    content: "Tym przyciskiem możesz zmienić ścieżkę zapisu",
-  },
-  {
     selector: ".Help",
     content: "Pod tym przyciskiesz znajdziesz krótki tutorial obsługi programu",
   },
@@ -44,6 +44,11 @@ const steps = [
   {
     selector: ".Disclaimer",
     content: "Aby wyświetlić ponownie zastrzeżenie autora, kliknij tutaj",
+  },
+  {
+    selector: "body",
+    content:
+      "To tyle! Miłego screenshotowania! Jeśli możesz, wystaw gwiazdkę na GitHubie",
   },
 ];
 
