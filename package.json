@@ -63,7 +63,7 @@
     "win": {
       "icon": "./build/icon.ico",
       "target": [
-        "portable"
+        "zip"
       ]
     }
   },
