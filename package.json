@@ -44,7 +44,9 @@
     "build-python": "robocopy python/dist/main build/main /S",
     "build-electron": "robocopy electron build/electron /S",
     "package": "electron-builder build --win -c.extraMetadata.main=build/electron/electron.js --publish never",
-    "dist": "yarn build && yarn build-python & yarn build-electron & yarn package"
+    "package-mac": "electron-builder build --mac -c.extraMetadata.main=build/electron/electron.js --publish never",
+    "dist": "yarn build && yarn build-python & yarn build-electron & yarn package",
+    "dist-mac": "yarn build && yarn build-python & yarn build-electron & yarn package-mac"
   },
   "build": {
     "appId": "com.electron.electron-with-create-react-app",
@@ -63,6 +65,13 @@
     "win": {
       "icon": "./build/icon.ico",
       "target": [
+        "zip"
+      ]
+    },
+    "mac": {
+      "icon": "./build/icon.icns",
+      "target": [
+        "default",
         "zip"
       ]
     }
